@@ -1,4 +1,4 @@
-package duelo_ui_arena_xtend
+package duelo_ui
 
 class DenunciaWindow {
 	/*
