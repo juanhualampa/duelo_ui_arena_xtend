@@ -5,4 +5,7 @@ class DenunciaWindow {
 	 * ejemplo para cargar carpeta en el proyecto mavenizado
 	 */
 	
+	/*
+	 * Bla
+	 */
 }
