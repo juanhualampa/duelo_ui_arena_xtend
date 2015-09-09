@@ -36,7 +36,7 @@ class DueloApplication extends Application {
 		var Retador ret2 = new Retador(jugador2, per2, ubi2);
 		
 		
-		var Duelo duelo = new Duelo(sis, ret1, ret2);
+		var Duelo duelo = new Duelo( ret1, ret2);
 		///////////////////////MOTIVO///////////////////////////////
 		
 		var Motivo unMotivo = new AbusoDeHabilidad();
