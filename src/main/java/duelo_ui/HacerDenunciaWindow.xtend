@@ -9,6 +9,7 @@ import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Selector
+import org.uqbar.arena.windows.Dialog
 
 class HacerDenunciaWindow extends SimpleWindow<Denuncia>{
 	
@@ -52,7 +53,7 @@ class HacerDenunciaWindow extends SimpleWindow<Denuncia>{
 		new Button(denunciasPanel) => [
 			caption = "Denunciar"
 			setAsDefault
-			onClick [ | this.modelObject.castigar ]
+			onClick [ | this.generarDenuncia() ]
 			
 		]
 		
@@ -63,6 +64,20 @@ class HacerDenunciaWindow extends SimpleWindow<Denuncia>{
 		]
 	
 	}
+	
+	def generarDenuncia() {
+		//chequear que haya seleccionado algo en el Selector
+		if(this.modelObject.calcularValidez()){
+			this.openDialog(new DenunciaVerdadera(this,modelObject.contexto.retado))
+		}else{
+			this.openDialog(new DenunciaFalsa(this,modelObject.contexto.retador))
+		}
+	}
+	
+	def openDialog(SimpleWindow<?> dialog) {
+		dialog.open()
+	}
+	
 }
 
 //		new TextBox(editorPanel) => [
