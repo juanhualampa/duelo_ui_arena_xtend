@@ -1,5 +1,16 @@
 package duelo_ui;
 
+import domain.AbusoDeHabilidad;
+import domain.Denuncia;
+import domain.Descripcion;
+import domain.Duelo;
+import domain.Jugador;
+import domain.Motivo;
+import domain.Personaje;
+import domain.Retador;
+import domain.Sistema;
+import domain.Ubicacion;
+import duelo_ui.HacerDenunciaWindow;
 import org.uqbar.arena.Application;
 import org.uqbar.arena.windows.Window;
 
@@ -7,10 +18,24 @@ import org.uqbar.arena.windows.Window;
 public class DueloApplication extends Application {
   @Override
   public Window<?> createMainWindow() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method JUNGLE is undefined for the type DueloApplication"
-      + "\nInvalid number of arguments. The constructor Duelo(Retador, Retador) is not applicable for the arguments (Sistema,Retador,Retador)"
-      + "\nType mismatch: cannot convert from Sistema to Retador");
+    HacerDenunciaWindow _xblockexpression = null;
+    {
+      Sistema sis = new Sistema();
+      Personaje per1 = new Personaje();
+      Personaje per2 = new Personaje();
+      Jugador jugador1 = new Jugador("pepito1");
+      Jugador jugador2 = new Jugador("pepito2");
+      Ubicacion ubi1 = Ubicacion.TOP;
+      Ubicacion ubi2 = Ubicacion.BOTTOM;
+      Retador ret1 = new Retador(jugador1, per1, ubi1);
+      Retador ret2 = new Retador(jugador2, per2, ubi2);
+      Duelo duelo = new Duelo(sis, ret1, ret2);
+      Motivo unMotivo = new AbusoDeHabilidad();
+      Descripcion unaDescripcion = new Descripcion("denuncio abuso de habilidad");
+      Denuncia den = new Denuncia(duelo, unMotivo, unaDescripcion);
+      _xblockexpression = new HacerDenunciaWindow(this, den);
+    }
+    return _xblockexpression;
   }
   
   public static void main(final String[] args) {

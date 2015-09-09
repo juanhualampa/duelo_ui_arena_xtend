@@ -29,7 +29,7 @@ class DueloApplication extends Application {
 		var Jugador jugador2 = new Jugador("pepito2");
 		
 		var Ubicacion ubi1 = Ubicacion.TOP;
-		var Ubicacion ubi2 = Ubicacion.JUNGLE;
+		var Ubicacion ubi2 = Ubicacion.BOTTOM;
 		
 		
 		var Retador ret1 = new Retador(jugador1, per1,ubi1);
