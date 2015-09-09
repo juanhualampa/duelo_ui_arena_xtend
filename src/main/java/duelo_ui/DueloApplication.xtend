@@ -11,7 +11,6 @@ import domain.Motivo
 import domain.AbusoDeHabilidad
 import domain.Descripcion
 import domain.Sistema
-import domain.EstadisticasPersonajes
 
 class DueloApplication extends Application {
 	
@@ -23,24 +22,12 @@ class DueloApplication extends Application {
 		
 		var Sistema sis = new Sistema();
 		//////////////////DUELO////////////////////////////////
-		var Jugador jugador1 = new Jugador("pepito1");
-		var Jugador jugador2 = new Jugador("pepito2");
-		
 		var Personaje per1 = new Personaje();
 		var Personaje per2 = new Personaje();
 		
-		var EstadisticasPersonajes e1 = new EstadisticasPersonajes()
-		var EstadisticasPersonajes e2 = new EstadisticasPersonajes()
+		var Jugador jugador1 = new Jugador("pepito1");
+		var Jugador jugador2 = new Jugador("pepito2");
 		
-		e1.calificacion = 23
-		e2.calificacion = 12
-		
-		jugador1.personajes.add(per1)
-		jugador2.personajes.add(per2)		
-		
-		sis.jugadores.add(jugador1)
-		sis.jugadores.add(jugador2)
-				
 		var Ubicacion ubi1 = Ubicacion.TOP;
 		var Ubicacion ubi2 = Ubicacion.BOTTOM;
 		
@@ -49,9 +36,8 @@ class DueloApplication extends Application {
 		var Retador ret2 = new Retador(jugador2, per2, ubi2);
 		
 		
-		var Duelo duelo = new Duelo( ret1, ret2);
+		var Duelo duelo = new Duelo(sis, ret1, ret2);
 		///////////////////////MOTIVO///////////////////////////////
-		
 		
 		var Motivo unMotivo = new AbusoDeHabilidad();
 		/////////////////////////////////////////////////////
