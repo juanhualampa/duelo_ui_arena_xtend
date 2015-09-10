@@ -9,7 +9,8 @@ import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Selector
-import org.uqbar.arena.windows.Dialog
+import org.uqbar.arena.bindings.PropertyAdapter
+import domain.Motivo
 
 class HacerDenunciaWindow extends SimpleWindow<Denuncia>{
 	
@@ -34,7 +35,8 @@ class HacerDenunciaWindow extends SimpleWindow<Denuncia>{
 
 		new Selector(denunciasPanel) => [
 			allowNull = false
-			bindItemsToProperty("motivosPosibles")
+			bindItemsToProperty("motivosPosibles").adapter = new PropertyAdapter(Motivo,"nombre")
+			//bindItemsToProperty("motivosPosibles")
 			bindValueToProperty("unMotivo")
 		]
 		
