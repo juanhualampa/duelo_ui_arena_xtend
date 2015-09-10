@@ -24,8 +24,8 @@ class DueloApplication extends Application {
 		
 		var Sistema sis = new Sistema();
 		//////////////////DUELO////////////////////////////////
-		var Personaje per1 = new Personaje();
-		var Personaje per2 = new Personaje();
+		var Personaje per1 = new Personaje("Wolverine","Araniar","La ducha",Ubicacion.BOTTOM);
+		var Personaje per2 = new Personaje("Gambito","Tirarte cartitas","Ni idea",Ubicacion.MIDDLE);
 		
 		var Jugador jugador1 = new Jugador("pepito1");
 		var Jugador jugador2 = new Jugador("pepito2");
