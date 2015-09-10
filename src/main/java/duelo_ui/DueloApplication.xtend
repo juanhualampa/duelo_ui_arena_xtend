@@ -11,6 +11,8 @@ import domain.Motivo
 import domain.AbusoDeHabilidad
 import domain.Descripcion
 import domain.Sistema
+import domain.Iniciador
+import domain.NoIniciador
 
 class DueloApplication extends Application {
 	
@@ -32,8 +34,8 @@ class DueloApplication extends Application {
 		var Ubicacion ubi2 = Ubicacion.BOTTOM;
 		
 		
-		var Retador ret1 = new Retador(jugador1, per1,ubi1);
-		var Retador ret2 = new Retador(jugador2, per2, ubi2);
+		var Retador ret1 = new Retador(jugador1, per1,ubi1,new Iniciador());
+		var Retador ret2 = new Retador(jugador2, per2, ubi2,new NoIniciador());
 		
 		
 		var Duelo duelo = new Duelo(sis, ret1, ret2);
