@@ -24,20 +24,19 @@ class DueloApplication extends Application {
 		
 		var Sistema sis = new Sistema();
 		//////////////////DUELO////////////////////////////////
+		var Ubicacion ubi1 = Ubicacion.TOP;
+		var Ubicacion ubi2 = Ubicacion.BOTTOM;
+		
 		var Personaje per1 = new Personaje("Wolverine","Araniar","La ducha",Ubicacion.BOTTOM);
 		var Personaje per2 = new Personaje("Gambito","Tirarte cartitas","Ni idea",Ubicacion.MIDDLE);
+			
 		
-		var Jugador jugador1 = new Jugador("pepito1");
-		var Jugador jugador2 = new Jugador("pepito2");
+		var Jugador jugador1 = new Jugador("pepito1",sis);
+		var Jugador jugador2 = new Jugador("pepito2",sis);
 		
 		jugador1.personajes.add(per1)
 		jugador2.personajes.add(per2)
 		
-		sis.jugadores.add(jugador1)
-		sis.jugadores.add(jugador2)
-		
-		var Ubicacion ubi1 = Ubicacion.TOP;
-		var Ubicacion ubi2 = Ubicacion.BOTTOM;
 		
 		
 		var Retador ret1 = new Retador(jugador1, per1,ubi1,new Iniciador());
@@ -48,6 +47,7 @@ class DueloApplication extends Application {
 		// Porque no funciona si hago 
 		//var Duelo duelo = new Duelo( ret1, ret2);
 		// si dispongo de 2 constructores ?
+		//println(duelo.resultado.visualizacion)
 		///////////////////////MOTIVO///////////////////////////////
 		
 		var Motivo unMotivo = new AbusoDeHabilidad();
