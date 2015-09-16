@@ -8,6 +8,7 @@ import java.util.ArrayList
 import org.uqbar.commons.model.ObservableUtils
 import domain.Jugador
 
+
 @Accessors
 @Observable
 class RetarADueloAppModel {
@@ -19,11 +20,6 @@ class RetarADueloAppModel {
 	List<EstadisticasPersonajes> estadisticasPersonajes
 	Jugador jugador
 	PersonajePuntaje personajeConPuntaje
-//	Integer vecesUsadoPersonaje
-//	Integer vecesQueGano
-//	Integer vecesQueMato
-//	Integer vecesDeads
-//	Integer vecesAssists
 	
 	new(Jugador jugador){
 		personajeABuscar = "";
@@ -32,11 +28,21 @@ class RetarADueloAppModel {
 		this.personajes = this.estadisticasPersonajes.map[personaje];
 		
 	}
-			
-	def EstadisticasPersonajes estadisticaPersonajeSeleccionado(){
+	
+	def void setPersonajeConPuntaje(PersonajePuntaje p){
+		this.personajeConPuntaje = p
+		ObservableUtils.firePropertyChanged(this,"estadisticaPersonajeSeleccionado")
+	}
+	
+	def EstadisticasPersonajes getEstadisticaPersonajeSeleccionado(){
 		//estadisticaPersonajeSeleccionado = 
+		if (personajeConPuntaje == null){
+			jugador.estadisticasPersonajes.get(0)
+		}
+		else{
+			jugador.estadisticas(personajeConPuntaje.personaje)
+		}
 		
-		jugador.estadisticas(personajeConPuntaje.personaje)
 	}
 	
 	def List<PersonajePuntaje> personajesConPuntaje(){

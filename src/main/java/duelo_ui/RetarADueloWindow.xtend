@@ -44,10 +44,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		new Label(panelCentral).setText("No hay personaje seleccionado")
 		.bindValueToProperty("personajeConPuntaje.personaje")
 		
-		this.datosPersonaje(panelCentral, this.modelObject.estadisticaPersonajeSeleccionado())
-		
-		//this.createResultsGrid(mainPanel)
-		//this.detallarPersonaje(elegirPersonajePanel, this.modelObject.personajeSeleccionado)
+		this.datosPersonaje(panelCentral, this.modelObject.getEstadisticaPersonajeSeleccionado())
 		val panelDerecho = new Panel(paneles)
 		panelDerecho.layout = new VerticalLayout()
 		
@@ -101,31 +98,31 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		estadisticasPanel.layout = new ColumnLayout(2)
 		
 		new Label(estadisticasPanel).setText("Jugadas")
-		new Label(estadisticasPanel).setText("")
+		new Label(estadisticasPanel)
 		.bindValueToProperty("estadisticaPersonajeSeleccionado.vecesUsadoAntesDelDuelo")
 		
 		new Label(estadisticasPanel).setText("Ganadas")
-		new Label(estadisticasPanel).setText("")
+		new Label(estadisticasPanel)
 		.bindValueToProperty("estadisticaPersonajeSeleccionado.vecesQueGanoDuelo")
 //		
 		new Label(estadisticasPanel).setText("Kills")
-		new Label(estadisticasPanel).setText("")
+		new Label(estadisticasPanel)
 		.bindValueToProperty("estadisticaPersonajeSeleccionado.vecesKills")
 //		
 		new Label(estadisticasPanel).setText("Deads")
-		new Label(estadisticasPanel).setText("")
+		new Label(estadisticasPanel)
 		.bindValueToProperty("estadisticaPersonajeSeleccionado.vecesDeads")
 //		
 		new Label(estadisticasPanel).setText("Assists")
-		new Label(estadisticasPanel).setText("")
+		new Label(estadisticasPanel)
 		.bindValueToProperty("estadisticaPersonajeSeleccionado.vecesAssist")
 //		
 		new Label(estadisticasPanel).setText("Mejor ubicacion")
-		new Label(estadisticasPanel).setText("")
+		new Label(estadisticasPanel)
 		.bindValueToProperty("estadisticaPersonajeSeleccionado.mejorUbicacion")
 		
 		new Label(estadisticasPanel).setText("Puntaje")
-		new Label(estadisticasPanel).setText("")
+		new Label(estadisticasPanel)
 		.bindValueToProperty("estadisticaPersonajeSeleccionado.calificacion.nro")
 		
 		
