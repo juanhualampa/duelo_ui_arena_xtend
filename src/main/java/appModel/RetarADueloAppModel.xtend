@@ -24,16 +24,16 @@ class RetarADueloAppModel {
 //	Integer vecesDeads
 //	Integer vecesAssists
 	
-	new(Jugador jugador, List<Personaje> personajesParaElegir){
+	new(Jugador jugador){
 		personajeABuscar = "";
 		this.jugador = jugador
-		this.personajes = personajesParaElegir;
-		this.estadisticasPersonajes = new ArrayList<EstadisticasPersonajes>()
-		for(Personaje p : this.personajes){
-			
-			val EstadisticasPersonajes est1 = new EstadisticasPersonajes(p)
-			this.estadisticasPersonajes.add(est1);
-		}
+		this.estadisticasPersonajes = this.jugador.estadisticasPersonajes
+		this.personajes = this.estadisticasPersonajes.map[personaje];
+		
+	}
+	
+	def estadisticaPersonajeSeleccionado(){
+		estadisticaPersonajeSeleccionado = jugador.estadisticas(personajeSeleccionado)
 	}
 	
 //	def setPersonajeSeleccionado(Personaje p){

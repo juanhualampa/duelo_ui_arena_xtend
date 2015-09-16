@@ -7,9 +7,15 @@ import java.util.List
 import domain.Personaje
 import java.util.ArrayList
 import domain.Jugador
+import domain.Ubicacion
+import domain.Sistema
+import domain.EstadisticasPersonajes
+import java.util.Arrays
+import domain.Calificacion
 
 class RetarADueloApplication extends Application{
 	
+		
 	override protected createMainWindow() {
 		
 		/////////////////////////////////////ESPECIALIDADES////////////////
@@ -56,30 +62,48 @@ class RetarADueloApplication extends Application{
 		deb5.add("tactica defensiva");
 		deb5.add("Cuerpo a cuerpo");
 		
+		///////// CREO UBICACIONES ////////////////////////////
+		
+		var ubi1 = Ubicacion.TOP;
+		var ubi2 = Ubicacion.BOTTOM;
+		var ubi3 = Ubicacion.MIDDLE;
+		var ubi4 = Ubicacion.JUNGLE;
+		
+		val ubicacionesUsadas = new ArrayList<Ubicacion>
+		ubicacionesUsadas.addAll(Arrays.asList(ubi1,ubi2,ubi1,ubi2))
+		
 		///////////////CREO PERSONAJES/////////////////////////
-		var Personaje personaje1 = new Personaje("PEPITO1",esp1,deb1);
+		var Personaje personaje1 = new Personaje("PEPITO1",esp1,deb1,ubi1);		
+		var Personaje personaje2 = new Personaje("PEPITO2",esp2,deb2,ubi2);		
+		var Personaje personaje3 = new Personaje("PEPITO3",esp3,deb3,ubi1);		
+		var Personaje personaje4 = new Personaje("PEPITO4",esp4,deb4,ubi3);		
+		var Personaje personaje5 = new Personaje("PEPITO5",esp5,deb5,ubi4);
 		
-		var Personaje personaje2 = new Personaje("PEPITO2",esp2,deb2);
+		/// LE DOY UNA CALIFICACION INICIAL /////////////////////////
 		
-		var Personaje personaje3 = new Personaje("PEPITO3",esp3,deb3);
+		val calPerdedora = new Calificacion("NOOB",5)
+		val calRampage = new Calificacion("NOOB",5)
+		///////////////////////CREO ESTADISTICAS PARA PERSONAJES //////////////////////////////
 		
-		var Personaje personaje4 = new Personaje("PEPITO4",esp4,deb4);
+		val est1 = new EstadisticasPersonajes(personaje1,10,4, 3, 1, 5, ubicacionesUsadas, ubi1,calRampage)
+		val est2 = new EstadisticasPersonajes(personaje2,10,4, 3, 1, 5, ubicacionesUsadas, ubi1,calRampage)
+		val est3 = new EstadisticasPersonajes(personaje3,3,1, 1, 1, 1, ubicacionesUsadas, ubi1,calPerdedora)
+		val est4 = new EstadisticasPersonajes(personaje4,2,1,1, 1, 1, ubicacionesUsadas, ubi1,calPerdedora)
+		val est5 = new EstadisticasPersonajes(personaje5,1,1,1, 1, 1, ubicacionesUsadas, ubi1,calPerdedora)
 		
-		var Personaje personaje5 = new Personaje("PEPITO5",esp5,deb5);
+		var List<EstadisticasPersonajes> estadisticasPersonajes = new ArrayList<EstadisticasPersonajes>()
+		
+		estadisticasPersonajes.add(est1)
+		estadisticasPersonajes.add(est2)
+		estadisticasPersonajes.add(est3)
+		estadisticasPersonajes.add(est4)
+		estadisticasPersonajes.add(est5)
 		
 		//////////////////////////JUGADOR////////////////////////////
-		var Jugador jugador = new Jugador();
-		/////////////////////////////////////////////////////
+		val Sistema sis = new Sistema()
+		var Jugador jugador = new Jugador("SuperHijitus",sis,estadisticasPersonajes);
 		
-		var List<Personaje> personajes = new ArrayList<Personaje>()
-		
-		personajes.add(personaje1)
-		personajes.add(personaje2)
-		personajes.add(personaje3)
-		personajes.add(personaje4)
-		personajes.add(personaje5)
-		
-		var RetarADueloAppModel retAppModel = new RetarADueloAppModel(jugador,personajes)
+		var RetarADueloAppModel retAppModel = new RetarADueloAppModel(jugador)
 		
 		new RetarADueloWindow(this,retAppModel)
 	}

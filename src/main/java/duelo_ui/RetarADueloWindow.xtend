@@ -13,6 +13,8 @@ import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.widgets.List
 import org.uqbar.arena.widgets.Button
 import domain.Ubicacion
+import domain.Jugador
+import domain.EstadisticasPersonajes
 
 class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	
@@ -36,45 +38,45 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		
 		this.detallarPersonaje(mainPanel, this.modelObject.personajeSeleccionado)
 		
-		this.detallarEstadisticas(mainPanel, this.modelObject.personajeSeleccionado)
+		this.detallarEstadisticas(mainPanel, this.modelObject)
 		
 	}
 	
-	def detallarEstadisticas(Panel mainPanel, Personaje personaje) {
+	def detallarEstadisticas(Panel mainPanel, RetarADueloAppModel personaje) {
 		val estadisticasPanel = new Panel(mainPanel)
 		estadisticasPanel.layout = new ColumnLayout(2)
 		
-//		new Label(estadisticasPanel).setText("Jugadas")
-//		new Label(estadisticasPanel).setText("")
-//		.bindValueToProperty("estadisticaPersonajeSeleccionado.vecesUsadoAntesDelDuelo")
+		new Label(estadisticasPanel).setText("Jugadas")
+		new Label(estadisticasPanel).setText("")
+		.bindValueToProperty("estadisticaPersonajeSeleccionado.vecesUsadoAntesDelDuelo")
 		
-//		new Label(estadisticasPanel).setText("Ganadas")
-//		new Label(estadisticasPanel).setText("")
-//		.bindValueToProperty("vecesQueGano")
+		new Label(estadisticasPanel).setText("Ganadas")
+		new Label(estadisticasPanel).setText("")
+		.bindValueToProperty("estadisticaPersonajeSeleccionado.vecesQueGanoDuelo")
 //		
-//		new Label(estadisticasPanel).setText("Kills")
-//		new Label(estadisticasPanel).setText("")
-//		.bindValueToProperty("vecesQueMato")
+		new Label(estadisticasPanel).setText("Kills")
+		new Label(estadisticasPanel).setText("")
+		.bindValueToProperty("estadisticaPersonajeSeleccionado.vecesKills")
 //		
-//		new Label(estadisticasPanel).setText("Deads")
-//		new Label(estadisticasPanel).setText("")
-//		.bindValueToProperty("vecesDeads")
+		new Label(estadisticasPanel).setText("Deads")
+		new Label(estadisticasPanel).setText("")
+		.bindValueToProperty("estadisticaPersonajeSeleccionado.vecesDeads")
 //		
-//		new Label(estadisticasPanel).setText("Assists")
-//		new Label(estadisticasPanel).setText("")
-//		.bindValueToProperty("vecesAssists")
+		new Label(estadisticasPanel).setText("Assists")
+		new Label(estadisticasPanel).setText("")
+		.bindValueToProperty("estadisticaPersonajeSeleccionado.vecesAssist")
 //		
 		new Label(estadisticasPanel).setText("Mejor ubicacion")
 		new Label(estadisticasPanel).setText("")
-		.bindValueToProperty("personajeSeleccionado.ubicacionIdeal")
+		.bindValueToProperty("estadisticaPersonajeSeleccionado.mejorUbicacion")
 		
 		new Label(estadisticasPanel).setText("Puntaje")
 		new Label(estadisticasPanel).setText("")
-		.bindValueToProperty("personajeSeleccionado.puntaje")
+		.bindValueToProperty("estadisticaPersonajeSeleccionado.calificacion.nro")
 		
 		
 	}
-	
+		
 	def detallarPersonaje(Panel panel, Personaje personaje) {
 		val caracteristicasPanel = new Panel(panel)
 		caracteristicasPanel.layout = new ColumnLayout(2)
@@ -97,25 +99,25 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	}
 	
 	def createResultsGrid(Panel panel) {
-		val table = new Table<Personaje>(panel, typeof(Personaje)) => [
+		val table = new Table<EstadisticasPersonajes>(panel, typeof(EstadisticasPersonajes)) => [
 			bindItemsToProperty("personajes")
 			bindValueToProperty("personajeSeleccionado")
 		]
 		this.describeResultsGrid(table)
 	}
 	
-	def describeResultsGrid(Table<Personaje> table) {
-		new Column<Personaje>(table) => [
+	def describeResultsGrid(Table<EstadisticasPersonajes> table) {
+		new Column<EstadisticasPersonajes>(table) => [
 			title = "Nombre"
 			fixedSize = 50
-			bindContentsToProperty("nombre")
+			bindContentsToProperty("personaje.nombre")
 		]
 		
-		new Column<Personaje>(table) => [
-			title = "Puntaje"
-			fixedSize = 30
-			bindContentsToProperty("puntaje")
-		]
+//		new Column<EstadisticasPersonajes>(table) => [
+//			title = "Puntaje"
+//			fixedSize = 30
+//			bindContentsToProperty("calificacion.nro")
+//		]
 	}
 	
 	def buscarPersonaje(Panel mainPanel) {
@@ -124,7 +126,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		
 		new Label(buscarPanel).setText("Personaje Buscado");
 		
-		new TextBox(buscarPanel).bindValueToProperty("personajeABuscar")
+		new TextBox(buscarPanel).bindValueToProperty("personajeABuscar") // Aca habria que usar un transformer,no?
 		
 	}
 	
