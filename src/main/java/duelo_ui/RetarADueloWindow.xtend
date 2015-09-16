@@ -51,7 +51,6 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		panelDerecho.layout = new VerticalLayout()
 		
 		this.estadisticas(panelDerecho, this.modelObject)
-		
 	}
 	
 	def buscarPersonaje(Panel mainPanel) {
@@ -92,8 +91,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
             width = 100
             height = 100
       ]
-	}
-	
+	}	
 	
 	
 	def estadisticas(Panel mainPanel, RetarADueloAppModel personaje) {
@@ -153,11 +151,6 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	}
 	
 	
-	override protected addActions(Panel panel) {}
-	
-	/*
-	 
-	
 	override protected addActions(Panel panel) {
 		new Label(panel).setText("JUGAR")
 		
@@ -186,6 +179,4 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		]
 	}
 
-* 
-*/	
 }
