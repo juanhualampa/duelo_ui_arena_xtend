@@ -15,7 +15,7 @@ class RetarADueloAppModel {
 	String personajeABuscar
 	List<Personaje>personajes;
 	Personaje personajeSeleccionado
-	EstadisticasPersonajes estadisticaPersonajeSeleccionado
+//	EstadisticasPersonajes estadisticaPersonajeSeleccionado
 	List<EstadisticasPersonajes> estadisticasPersonajes
 	Jugador jugador
 //	Integer vecesUsadoPersonaje
@@ -32,8 +32,9 @@ class RetarADueloAppModel {
 		
 	}
 	
-	def estadisticaPersonajeSeleccionado(){
-		estadisticaPersonajeSeleccionado = jugador.estadisticas(personajeSeleccionado)
+	def EstadisticasPersonajes estadisticaPersonajeSeleccionado(){
+		//estadisticaPersonajeSeleccionado = 
+		jugador.estadisticas(personajeSeleccionado)
 	}
 	
 //	def setPersonajeSeleccionado(Personaje p){

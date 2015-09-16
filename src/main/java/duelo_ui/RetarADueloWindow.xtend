@@ -15,35 +15,90 @@ import org.uqbar.arena.widgets.Button
 import domain.Ubicacion
 import domain.Jugador
 import domain.EstadisticasPersonajes
+import org.uqbar.arena.layout.VerticalLayout
+import org.uqbar.arena.layout.HorizontalLayout
 
 class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	
 	new(WindowOwner parent, RetarADueloAppModel model) {
 		super(parent, model)
-		title = "Bienvenido: Desde esta página podrás elegir un personaje batirte a duelo con otro jugador"
-		taskDescription  = "Selecciona tu personaje para el duelo"
+		title = "Duelo App"
+		taskDescription  = "Bienvenido: Desde esta página podrás elegir un personaje batirte a duelo con otro jugador"
 	}
 	
 	
 	
 	override protected createFormPanel(Panel mainPanel) {
-		val elegirPersonajePanel = new Panel(mainPanel)
-		elegirPersonajePanel.layout = new ColumnLayout(3)
+		new Label(mainPanel).text = "Selecciona tu personaje para el duelo"
+		val paneles = new Panel(mainPanel)
+		paneles.layout= new HorizontalLayout()
 		
-		this.buscarPersonaje(elegirPersonajePanel);
-		new Label(elegirPersonajePanel).setText("No hay personaje seleccionado")
+		val panelIzquierdo = new Panel(paneles)
+		panelIzquierdo.layout = new VerticalLayout()//new ColumnLayout(2)
+		this.buscarPersonaje(panelIzquierdo)
+		this.createResultsGrid(panelIzquierdo)
+		
+		val panelCentral = new Panel(paneles)
+		panelCentral.layout = new VerticalLayout()
+		new Label(panelCentral).setText("No hay personaje seleccionado")
 		.bindValueToProperty("personajeSeleccionado")
 		
-		this.createResultsGrid(mainPanel)
+		this.datosPersonaje(panelCentral, this.modelObject.estadisticaPersonajeSeleccionado())
 		
-		this.detallarPersonaje(mainPanel, this.modelObject.personajeSeleccionado)
+		//this.createResultsGrid(mainPanel)
+		//this.detallarPersonaje(elegirPersonajePanel, this.modelObject.personajeSeleccionado)
+		val panelDerecho = new Panel(paneles)
+		panelDerecho.layout = new VerticalLayout()
 		
-		this.detallarEstadisticas(mainPanel, this.modelObject)
+		this.estadisticas(panelDerecho, this.modelObject)
 		
 	}
 	
-	def detallarEstadisticas(Panel mainPanel, RetarADueloAppModel personaje) {
+	def buscarPersonaje(Panel mainPanel) {
+		val buscarPanel = new Panel(mainPanel)
+		buscarPanel.layout = new ColumnLayout(2)
+		
+		new Label(buscarPanel).setText("Personaje Buscado");
+		
+		new TextBox(buscarPanel).bindValueToProperty("personajeABuscar") // Aca habria que usar un transformer,no?
+		
+	}
+	
+	
+	def datosPersonaje(Panel panel, EstadisticasPersonajes est) {
+		val especialidadesPanel = new Panel(panel)
+		new Label(especialidadesPanel).setText("Especialidades")
+		especialidadesPanel.layout = new VerticalLayout()
+		
+		new List(especialidadesPanel) => [
+            bindItemsToProperty("personajeSeleccionado.especialidades")
+            width = 100
+            height =100
+      ]
+      		
+		new Label(especialidadesPanel).setText("Debilidades")
+		
+		
+      new List(especialidadesPanel) => [
+            bindItemsToProperty("personajeSeleccionado.debilidades")
+            width = 100
+            height = 100
+      ]
+      
+      new Label(especialidadesPanel).setText("Mejor Posicion")
+      
+      new List(especialidadesPanel) => [
+            bindItemsToProperty("personajeSeleccionado.ubicacionIdeal")
+            width = 100
+            height = 100
+      ]
+	}
+	
+	
+	
+	def estadisticas(Panel mainPanel, RetarADueloAppModel personaje) {
 		val estadisticasPanel = new Panel(mainPanel)
+		
 		estadisticasPanel.layout = new ColumnLayout(2)
 		
 		new Label(estadisticasPanel).setText("Jugadas")
@@ -76,59 +131,32 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		
 		
 	}
-		
-	def detallarPersonaje(Panel panel, Personaje personaje) {
-		val caracteristicasPanel = new Panel(panel)
-		caracteristicasPanel.layout = new ColumnLayout(2)
-		
-		new Label(caracteristicasPanel).setText("Especialidades")
-		
-		new Label(caracteristicasPanel).setText("Debilidades")
-		
-		new List(caracteristicasPanel) => [
-            bindItemsToProperty("personajeSeleccionado.especialidades")
-            width = 100
-            height =100
-      ]
-      
-      new List(caracteristicasPanel) => [
-            bindItemsToProperty("personajeSeleccionado.debilidades")
-            width = 100
-            height = 100
-      ]
-	}
+	
 	
 	def createResultsGrid(Panel panel) {
 		val table = new Table<EstadisticasPersonajes>(panel, typeof(EstadisticasPersonajes)) => [
 			bindItemsToProperty("personajes")
 			bindValueToProperty("personajeSeleccionado")
 		]
-		this.describeResultsGrid(table)
-	}
-	
-	def describeResultsGrid(Table<EstadisticasPersonajes> table) {
+		
 		new Column<EstadisticasPersonajes>(table) => [
 			title = "Nombre"
 			fixedSize = 50
 			bindContentsToProperty("personaje.nombre")
 		]
 		
-//		new Column<EstadisticasPersonajes>(table) => [
-//			title = "Puntaje"
-//			fixedSize = 30
-//			bindContentsToProperty("calificacion.nro")
-//		]
+		new Column<EstadisticasPersonajes>(table) => [
+			title = "Puntaje"
+			fixedSize = 30
+			bindContentsToProperty("calificacion.nro")
+		]
 	}
 	
-	def buscarPersonaje(Panel mainPanel) {
-		val buscarPanel = new Panel(mainPanel)
-		buscarPanel.layout = new ColumnLayout(2)
-		
-		new Label(buscarPanel).setText("Personaje Buscado");
-		
-		new TextBox(buscarPanel).bindValueToProperty("personajeABuscar") // Aca habria que usar un transformer,no?
-		
-	}
+	
+	override protected addActions(Panel panel) {}
+	
+	/*
+	 
 	
 	override protected addActions(Panel panel) {
 		new Label(panel).setText("JUGAR")
@@ -157,5 +185,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 			onClick [ | this.modelObject.jugador.iniciarDuelo(this.modelObject.personajeSeleccionado,Ubicacion.JUNGLE) ]
 		]
 	}
-	
+
+* 
+*/	
 }
