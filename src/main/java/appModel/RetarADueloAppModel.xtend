@@ -18,6 +18,7 @@ class RetarADueloAppModel {
 //	EstadisticasPersonajes estadisticaPersonajeSeleccionado
 	List<EstadisticasPersonajes> estadisticasPersonajes
 	Jugador jugador
+	PersonajePuntaje personajeConPuntaje
 //	Integer vecesUsadoPersonaje
 //	Integer vecesQueGano
 //	Integer vecesQueMato
@@ -31,14 +32,15 @@ class RetarADueloAppModel {
 		this.personajes = this.estadisticasPersonajes.map[personaje];
 		
 	}
-	
+			
 	def EstadisticasPersonajes estadisticaPersonajeSeleccionado(){
 		//estadisticaPersonajeSeleccionado = 
-		jugador.estadisticas(personajeSeleccionado)
+		
+		jugador.estadisticas(personajeConPuntaje.personaje)
 	}
 	
-	def List<Pair<Personaje,Integer>> personajesConPuntaje(){
-		estadisticasPersonajes.map[new Pair(it.personaje, it.calificacion.nro)]
+	def List<PersonajePuntaje> personajesConPuntaje(){
+		estadisticasPersonajes.map[new PersonajePuntaje(it.personaje, it.calificacion.nro)]
 	}
 	
 //	def setPersonajeSeleccionado(Personaje p){
@@ -49,4 +51,5 @@ class RetarADueloAppModel {
 //			}
 //		}
 //	}
+
 }

@@ -17,6 +17,7 @@ import domain.Jugador
 import domain.EstadisticasPersonajes
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.layout.HorizontalLayout
+import appModel.PersonajePuntaje
 
 class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	
@@ -41,7 +42,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		val panelCentral = new Panel(paneles)
 		panelCentral.layout = new VerticalLayout()
 		new Label(panelCentral).setText("No hay personaje seleccionado")
-		.bindValueToProperty("personajeSeleccionado")
+		.bindValueToProperty("personajeConPuntaje.personaje")
 		
 		this.datosPersonaje(panelCentral, this.modelObject.estadisticaPersonajeSeleccionado())
 		
@@ -50,7 +51,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		val panelDerecho = new Panel(paneles)
 		panelDerecho.layout = new VerticalLayout()
 		
-		//this.estadisticas(panelDerecho, this.modelObject)
+		this.estadisticas(panelDerecho, this.modelObject)
 	}
 	
 	def buscarPersonaje(Panel mainPanel) {
@@ -70,27 +71,27 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		especialidadesPanel.layout = new VerticalLayout()
 		
 		new List(especialidadesPanel) => [
-            bindItemsToProperty("personajeSeleccionado.especialidades")
+            bindItemsToProperty("personajeConPuntaje.personaje.especialidades")
             width = 100
             height =100
-      ]
+        ]
       		
-		new Label(especialidadesPanel).setText("Debilidades")
+	  	new Label(especialidadesPanel).setText("Debilidades")
 		
 		
-      new List(especialidadesPanel) => [
-            bindItemsToProperty("personajeSeleccionado.debilidades")
+      	new List(especialidadesPanel) => [
+            bindItemsToProperty("personajeConPuntaje.personaje.debilidades")
             width = 100
             height = 100
-      ]
+      	]
       
-      new Label(especialidadesPanel).setText("Mejor Posicion")
+      	new Label(especialidadesPanel).setText("Mejor Posicion")
       
-      new List(especialidadesPanel) => [
-            bindItemsToProperty("personajeSeleccionado.ubicacionIdeal")
+      	new Label(especialidadesPanel) => [
+            bindValueToProperty("personajeConPuntaje.personaje.ubicacionIdeal")
             width = 100
             height = 100
-      ]
+      	]
 	}	
 	
 	
@@ -129,24 +130,23 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		
 		
 	}
-	
-	
+		
 	def personajesYPuntaje(Panel panel) {
-		val table = new Table<EstadisticasPersonajes>(panel, EstadisticasPersonajes) => [
-			bindItemsToProperty("personajes")
-			bindValueToProperty("personajeSeleccionado")
+		val table = new Table<PersonajePuntaje>(panel, PersonajePuntaje) => [
+			bindItemsToProperty("personajesConPuntaje")
+			bindValueToProperty("personajeConPuntaje")
 		]
 		
-		new Column<EstadisticasPersonajes>(table) => [
+		new Column<PersonajePuntaje>(table) => [
 			title = "Nombre"
 			fixedSize = 50
-			bindContentsToProperty("personaje.nombre")
+			bindContentsToProperty("personaje")
 		]
 		
-		new Column<EstadisticasPersonajes>(table) => [
+		new Column<PersonajePuntaje>(table) => [
 			title = "Puntaje"
 			fixedSize = 30
-			bindContentsToProperty("calificacion.nro")
+			bindContentsToProperty("puntaje")
 		]
 	}
 	
