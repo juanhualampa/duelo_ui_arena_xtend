@@ -36,7 +36,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		val panelIzquierdo = new Panel(paneles)
 		panelIzquierdo.layout = new VerticalLayout()//new ColumnLayout(2)
 		this.buscarPersonaje(panelIzquierdo)
-		this.createResultsGrid(panelIzquierdo)
+		this.personajesYPuntaje(panelIzquierdo)
 		
 		val panelCentral = new Panel(paneles)
 		panelCentral.layout = new VerticalLayout()
@@ -50,7 +50,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		val panelDerecho = new Panel(paneles)
 		panelDerecho.layout = new VerticalLayout()
 		
-		this.estadisticas(panelDerecho, this.modelObject)
+		//this.estadisticas(panelDerecho, this.modelObject)
 	}
 	
 	def buscarPersonaje(Panel mainPanel) {
@@ -131,8 +131,8 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	}
 	
 	
-	def createResultsGrid(Panel panel) {
-		val table = new Table<EstadisticasPersonajes>(panel, typeof(EstadisticasPersonajes)) => [
+	def personajesYPuntaje(Panel panel) {
+		val table = new Table<EstadisticasPersonajes>(panel, EstadisticasPersonajes) => [
 			bindItemsToProperty("personajes")
 			bindValueToProperty("personajeSeleccionado")
 		]

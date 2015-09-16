@@ -37,6 +37,10 @@ class RetarADueloAppModel {
 		jugador.estadisticas(personajeSeleccionado)
 	}
 	
+	def List<Pair<Personaje,Integer>> personajesConPuntaje(){
+		estadisticasPersonajes.map[new Pair(it.personaje, it.calificacion.nro)]
+	}
+	
 //	def setPersonajeSeleccionado(Personaje p){
 //		for(EstadisticasPersonajes ep : this.estadisticasPersonajes){
 //			if(ep.personaje.nombre.equals(personajeSeleccionado.nombre)){
