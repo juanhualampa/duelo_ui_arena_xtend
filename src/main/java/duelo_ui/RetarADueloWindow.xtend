@@ -23,6 +23,7 @@ import domain.Iniciador
 import org.uqbar.arena.windows.Dialog
 import domain.Resultado
 import domain.Duelo
+import appModel.MrxAppModel
 
 class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	

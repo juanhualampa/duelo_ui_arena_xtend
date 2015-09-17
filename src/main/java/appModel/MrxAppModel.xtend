@@ -1,4 +1,4 @@
-package duelo_ui
+package appModel
 
 import domain.Retador
 import domain.Sistema

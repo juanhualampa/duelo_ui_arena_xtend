@@ -7,6 +7,7 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Button
+import appModel.MrxAppModel
 
 class SinRivalWindow extends SimpleWindow<MrxAppModel>{
 	
