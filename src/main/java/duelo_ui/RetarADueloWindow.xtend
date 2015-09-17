@@ -24,6 +24,8 @@ import org.uqbar.arena.windows.Dialog
 import domain.Resultado
 import domain.Duelo
 import appModel.MrxAppModel
+import org.uqbar.arena.widgets.Selector
+import java.awt.Color
 
 class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	
@@ -80,7 +82,6 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
       		
 	  	new Label(especialidadesPanel).setText("Debilidades")
 		
-		
       	new List(especialidadesPanel) => [
             bindItemsToProperty("personajeConPuntaje.personaje.debilidades")
             width = 100
@@ -91,8 +92,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
       
       	new Label(especialidadesPanel) => [
             bindValueToProperty("personajeConPuntaje.personaje.ubicacionIdeal")
-            width = 100
-            height = 100
+            background = Color.white
       	]
 	}	
 	

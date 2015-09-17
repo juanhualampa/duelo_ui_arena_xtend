@@ -17,7 +17,7 @@ class HacerDenunciaWindow extends SimpleWindow<Denuncia>{
 	new(WindowOwner parent, Denuncia model) {
 		super(parent, model)
 		title = "DENUNCIAS"
-		taskDescription = "Haga sus denuncias"
+		taskDescription = "Hacer denuncia"
 	}
 	
 	override protected createFormPanel(Panel mainPanel) {
@@ -42,10 +42,12 @@ class HacerDenunciaWindow extends SimpleWindow<Denuncia>{
 		
 		///////////////////////FILA 3///////////////////////////////
 		
-		new Label(denunciasPanel).setText("Detalles")
+		new Label(denunciasPanel).setText("Detalles:")
 		
 		new TextBox(denunciasPanel) => [
 			 bindValueToProperty("unaDescripcion.palabras")
+			 width = 230
+			 height =20
 		]
 		
 		/////////////////////////////////////////////////////////////////
@@ -53,14 +55,14 @@ class HacerDenunciaWindow extends SimpleWindow<Denuncia>{
 	
 	override protected addActions(Panel denunciasPanel) {
 		new Button(denunciasPanel) => [
-			caption = "Denunciar"
+			caption = " Denunciar "
 			setAsDefault
 			onClick [ | this.generarDenuncia() ]
 			
 		]
 		
 		new Button(denunciasPanel) => [
-			caption = "Cancelar"
+			caption = " Cancelar "
 			setAsDefault
 			onClick [ | this.close() ]
 		]
@@ -69,6 +71,7 @@ class HacerDenunciaWindow extends SimpleWindow<Denuncia>{
 	
 	def generarDenuncia() {
 		//chequear que haya seleccionado algo en el Selector
+		
 		if(this.modelObject.calcularValidez()){
 			this.openDialog(new DenunciaVerdadera(this,modelObject.contexto.retado))
 		}else{
