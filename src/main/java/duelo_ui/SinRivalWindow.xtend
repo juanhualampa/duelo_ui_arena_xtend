@@ -8,25 +8,26 @@ import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Button
 
-class SinRivalWindow extends SimpleWindow<Retador>{
+class SinRivalWindow extends SimpleWindow<MrxAppModel>{
 	
-	new(WindowOwner parent, Retador model) {
+	new(WindowOwner parent, MrxAppModel model) {
 		super(parent, model)
 		title = "No tienes Rival!"
 	}
 	
 	override protected addActions(Panel denunciasPanel) {
+		
 		new Button(denunciasPanel) => [
 			caption = "Retar MR-X!!!"
 			setAsDefault
-			onClick [ |  ]
+			onClick [ | this.modelObject.sistema.realizarDuelo(this.modelObject.retador,this.modelObject.sistema.dameAMRX(this.modelObject.retador)) ]
 			
 		]
 		
 		new Button(denunciasPanel) => [
 			caption = "Descansar en mi gloria"
 			setAsDefault
-			onClick [ |  ]
+			onClick [ |  this.close]
 			
 		]
 	}

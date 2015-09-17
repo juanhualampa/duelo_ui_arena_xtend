@@ -7,17 +7,22 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.widgets.TextBox
-import domain.Personaje
 import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.widgets.List
 import org.uqbar.arena.widgets.Button
 import domain.Ubicacion
-import domain.Jugador
 import domain.EstadisticasPersonajes
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.layout.HorizontalLayout
 import appModel.PersonajePuntaje
+import domain.NoHayOponenteException
+import domain.Personaje
+import domain.Retador
+import domain.Iniciador
+import org.uqbar.arena.windows.Dialog
+import domain.Resultado
+import domain.Duelo
 
 class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	
@@ -35,7 +40,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		paneles.layout= new HorizontalLayout()
 		
 		val panelIzquierdo = new Panel(paneles)
-		panelIzquierdo.layout = new VerticalLayout()//new ColumnLayout(2)
+		panelIzquierdo.layout = new VerticalLayout()
 		this.buscarPersonaje(panelIzquierdo)
 		this.personajesYPuntaje(panelIzquierdo)
 		
@@ -55,9 +60,8 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		val buscarPanel = new Panel(mainPanel)
 		buscarPanel.layout = new ColumnLayout(2)
 		
-		new Label(buscarPanel).setText("Personaje Buscado");
-		
-		new TextBox(buscarPanel).bindValueToProperty("personajeABuscar") // Aca habria que usar un transformer,no?
+		new Label(buscarPanel).setText("Personaje Buscado")
+		new TextBox(buscarPanel).bindValueToProperty("personajeABuscar") 
 		
 	}
 	
@@ -154,26 +158,41 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		new Button(panel) => [
 			caption = "TOP"
 			setAsDefault
-			onClick [ | this.modelObject.jugador.iniciarDuelo(this.modelObject.personajeSeleccionado,Ubicacion.TOP) ]
+			onClick [ | this.validar(this.modelObject.personajeSeleccionado,Ubicacion.TOP)				
+			]
 		]
 		
 		new Button(panel) => [
 			caption = "BOTTOM"
 			setAsDefault
-			onClick [ | this.modelObject.jugador.iniciarDuelo(this.modelObject.personajeSeleccionado,Ubicacion.BOTTOM) ]
+			onClick [ | this.validar(this.modelObject.personajeSeleccionado,Ubicacion.BOTTOM) ]
 		]
 		
 		new Button(panel) => [
 			caption = "MIDDLE"
 			setAsDefault
-			onClick [ | this.modelObject.jugador.iniciarDuelo(this.modelObject.personajeSeleccionado,Ubicacion.MIDDLE) ]
+			onClick [ | this.validar(this.modelObject.personajeSeleccionado,Ubicacion.MIDDLE) ]
 		]
 		
 		new Button(panel) => [
 			caption = "JUNGLE"
 			setAsDefault
-			onClick [ | this.modelObject.jugador.iniciarDuelo(this.modelObject.personajeSeleccionado,Ubicacion.JUNGLE) ]
+			onClick [ | this.validar(this.modelObject.personajeSeleccionado,Ubicacion.JUNGLE) ]
 		]
+	}
+	
+	def validar(Personaje personaje, Ubicacion ubicacion) {
+		try{
+			val Duelo duelo = this.modelObject.jugador.iniciarDuelo(personaje,ubicacion)
+			this.openDialog(new ResultadoDueloWindow(this,duelo))
+			}
+		catch (NoHayOponenteException e){
+			this.openDialog(new SinRivalWindow(this,new MrxAppModel (new Retador(this.modelObject.jugador,personaje,ubicacion, new Iniciador),this.modelObject.jugador.sistema)))
+		}
+	}
+	
+	def openDialog(SimpleWindow <?> window){
+		window.open
 	}
 
 }

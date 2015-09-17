@@ -4,7 +4,6 @@ import domain.Personaje
 import org.uqbar.commons.utils.Observable
 import java.util.List
 import domain.EstadisticasPersonajes
-import java.util.ArrayList
 import org.uqbar.commons.model.ObservableUtils
 import domain.Jugador
 
@@ -19,15 +18,26 @@ class RetarADueloAppModel {
 //	EstadisticasPersonajes estadisticaPersonajeSeleccionado
 	List<EstadisticasPersonajes> estadisticasPersonajes
 	Jugador jugador
+	List<PersonajePuntaje> personajesConPuntaje
 	PersonajePuntaje personajeConPuntaje
 	
 	new(Jugador jugador){
 		personajeABuscar = "";
 		this.jugador = jugador
 		this.estadisticasPersonajes = this.jugador.estadisticasPersonajes
-		this.personajes = this.estadisticasPersonajes.map[personaje];
+		this.personajes = this.estadisticasPersonajes.map[personaje]
+		this.personajesConPuntaje = estadisticasPersonajes.map[new PersonajePuntaje(it.personaje, it.calificacion.nro)]
 		
 	}
+	
+//	def setPersonajeABuscar(String s){
+//		this.setPersonajesConPuntaje(personajesConPuntaje.filter[it.personaje.nombre.contains(s)].toList)
+//		ObservableUtils.firePropertyChanged(this,"personajesConPuntaje")
+//	}
+//	
+//	def setPersonajesConPuntaje(List<PersonajePuntaje> p){
+//		p
+//	}
 	
 	def void setPersonajeConPuntaje(PersonajePuntaje p){
 		this.personajeConPuntaje = p
@@ -43,10 +53,6 @@ class RetarADueloAppModel {
 			jugador.estadisticas(personajeConPuntaje.personaje)
 		}
 		
-	}
-	
-	def List<PersonajePuntaje> personajesConPuntaje(){
-		estadisticasPersonajes.map[new PersonajePuntaje(it.personaje, it.calificacion.nro)]
 	}
 	
 //	def setPersonajeSeleccionado(Personaje p){
