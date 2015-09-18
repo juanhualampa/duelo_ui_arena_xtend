@@ -21,7 +21,7 @@ class SinRivalWindow extends SimpleWindow<MrxAppModel>{
 		new Button(denunciasPanel) => [
 			caption = "Retar MR-X!!!"
 			setAsDefault
-			onClick [ | this.modelObject.sistema.realizarDuelo(this.modelObject.retador,this.modelObject.sistema.dameAMRX(this.modelObject.retador)) ]
+			onClick [ | this.modelObject.realizarDuelo]
 			
 		]
 		

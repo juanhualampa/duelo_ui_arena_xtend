@@ -42,12 +42,14 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		]
 	}
 	
-	def crearPanelDerecho(Panel panel) {
-		new Panel(panel) => [
+	def crearPanelIzquierdo(Panel panel) {
+		new Panel(panel) =>[
 			layout = new VerticalLayout()
-			this.estadisticas(it)
+		this.buscarPersonaje(it)
+		this.personajesYPuntaje(it)
 		]
 	}
+	
 	
 	def crearPanelCentral(Panel panel) {
 		new Panel(panel) => [
@@ -57,12 +59,11 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 			this.datosPersonaje(it)
 		]
 	}
-		
-	def crearPanelIzquierdo(Panel panel) {
-		new Panel(panel) =>[
+	
+	def crearPanelDerecho(Panel panel) {
+		new Panel(panel) => [
 			layout = new VerticalLayout()
-		this.buscarPersonaje(it)
-		this.personajesYPuntaje(it)
+			this.estadisticas(it)
 		]
 	}
 	
@@ -101,7 +102,10 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	
 	def estadisticas(Panel mainPanel) {
 		new Panel(mainPanel) => [
-			layout = new ColumnLayout(2)		
+		layout = new ColumnLayout(2)
+//		this.modelObject.datosDeEstadisticas.forEach[
+//			crearLabel(panel,it.key,it.value.toString)
+//		]	
 			crearLabel(it,"Jugadas","estadisticaPersonajeSeleccionado.vecesUsadoAntesDelDuelo")
 			crearLabel(it,"Ganadas","estadisticaPersonajeSeleccionado.vecesQueGanoDuelo")
 			crearLabel(it,"Kills","estadisticaPersonajeSeleccionado.vecesKills")
@@ -112,6 +116,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		]		
 	}
 		
+	
 	def personajesYPuntaje(Panel panel) {
 		val table = new Table<PersonajePuntaje>(panel, PersonajePuntaje) => [
 			bindItemsToProperty("personajesConPuntaje")
@@ -141,10 +146,9 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	
 	override protected addActions(Panel panel) {
 		new Label(panel).setText("JUGAR")
-		crearButtonParaAcciones(panel, "TOP" ,Ubicacion.TOP)
-		crearButtonParaAcciones(panel, "BOTTOM" ,Ubicacion.BOTTOM)
-		crearButtonParaAcciones(panel, "MIDDLE" ,Ubicacion.MIDDLE)
-		crearButtonParaAcciones(panel, "JUNGLE" ,Ubicacion.JUNGLE)
+		this.modelObject.ubicacionesPosibles.forEach[
+			crearButtonParaAcciones(panel, it.toString ,it)
+		]
 	}
 	
 	def validar(Personaje personaje, Ubicacion ubicacion) {
@@ -153,7 +157,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 			this.openDialog(new ResultadoDueloWindow(this,new DueloAppModel(duelo)))
 			}
 		catch (NoHayOponenteException e){
-			this.openDialog(new SinRivalWindow(this,new MrxAppModel (new Retador(this.modelObject.jugador,personaje,ubicacion, new Iniciador),this.modelObject.jugador.sistema)))
+			this.openDialog(new SinRivalWindow(this,new MrxAppModel(this.modelObject.retador,this.modelObject.jugador.sistema)))
 		}
 	}
 	

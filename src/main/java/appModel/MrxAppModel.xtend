@@ -16,5 +16,13 @@ class MrxAppModel {
 		this.retador = retador
 		this.sistema = sis
 	}
+		
+	def realizarDuelo() {
+		sistema.realizarDuelo(retador,mrX)
+	}
+	
+	def mrX() {
+		sistema.dameAMRX(this.retador)
+	}
 	
 }

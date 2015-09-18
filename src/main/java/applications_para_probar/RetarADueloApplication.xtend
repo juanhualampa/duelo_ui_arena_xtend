@@ -107,13 +107,14 @@ class RetarADueloApplication extends Application{
 		
 		//////////////////////////JUGADOR////////////////////////////
 		val Sistema sis = new Sistema()
-		var Jugador jugador = new Jugador("SuperHijitus",sis,estadisticasPersonajes);
+		var Jugador jugador = new Jugador("Super Hijitus",sis,estadisticasPersonajes)
+		var Jugador jugador2 = new Jugador("Neurus",sis,estadisticasPersonajes)
 		
 		var RetarADueloAppModel retAppModel = new RetarADueloAppModel(jugador)
-		//new RetarADueloWindow(this,retAppModel)
+		new RetarADueloWindow(this,retAppModel)
 		
 		
-		new ResultadoDueloWindow(this,new DueloAppModel(sis.realizarDuelo(new Retador(jugador, personaje1,ubi1,new Iniciador),new Retador(jugador, personaje1,ubi1,new NoIniciador))))
+		//new ResultadoDueloWindow(this,new DueloAppModel(sis.realizarDuelo(new Retador(jugador, personaje1,ubi1,new Iniciador),new Retador(jugador, personaje1,ubi1,new NoIniciador))))
 	}
 	
 	def static main(String[] args) {

@@ -11,6 +11,7 @@ import org.uqbar.arena.widgets.Selector
 import org.uqbar.arena.bindings.PropertyAdapter
 import domain.Motivo
 import appModels.DenunciaAppModel
+import org.uqbar.arena.bindings.NotNullObservable
 
 class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 	
@@ -45,30 +46,33 @@ class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 	
 	override protected addActions(Panel denunciasPanel) {
 		new Button(denunciasPanel) => [
-			caption = " Denunciar "
-			setAsDefault
-			onClick [ | this.generarDenuncia() ]
-			
-		]		
-		new Button(denunciasPanel) => [
 			caption = " Cancelar "
 			setAsDefault
 			onClick [ | this.close() ]
-		]	
+		]
+		new Button(denunciasPanel) => [
+			caption = " Denunciar "
+			onClick [ | this.generarDenuncia() ]	
+			bindEnabled(new NotNullObservable("unMotivo"))
+			bindEnabled(new NotNullObservable("palabrasDescripcion"))		
+			bindEnabledToProperty("puedeDenunciar")
+			disableOnError			
+		]		
+		
+			
 	}
 	
 	def generarDenuncia() {
 		//chequear que haya seleccionado algo en el Selector
 		this.modelObject.efectivizarDenuncia()	
 		if(this.modelObject.calcularValidez())
-		{
-					
-			this.openDialog(new DenunciaVerdadera(this,modelObject.denunciado))	
-		}
+			{						
+				this.openDialog(new DenunciaVerdadera(this,modelObject.denunciado))	
+			}
 		else
-		{
-			this.openDialog(new DenunciaFalsa(this,modelObject.denunciado))
-		}
+			{
+				this.openDialog(new DenunciaFalsa(this,modelObject.denunciado))
+			}	
 	}
 	
 	def openDialog(SimpleWindow<?> dialog) {
