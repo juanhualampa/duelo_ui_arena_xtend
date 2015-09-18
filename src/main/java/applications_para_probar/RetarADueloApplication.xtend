@@ -108,7 +108,7 @@ class RetarADueloApplication extends Application{
 		//////////////////////////JUGADOR////////////////////////////
 		val Sistema sis = new Sistema()
 		var Jugador jugador = new Jugador("Super Hijitus",sis,estadisticasPersonajes)
-		var Jugador jugador2 = new Jugador("Neurus",sis,estadisticasPersonajes)
+		//var Jugador jugador2 = new Jugador("Neurus",sis,estadisticasPersonajes)
 		
 		var RetarADueloAppModel retAppModel = new RetarADueloAppModel(jugador)
 		new RetarADueloWindow(this,retAppModel)

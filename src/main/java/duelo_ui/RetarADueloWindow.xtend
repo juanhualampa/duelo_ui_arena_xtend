@@ -139,8 +139,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		new Button(panel) => [
 			caption = aCaption
 			setAsDefault
-			onClick [ | this.validar(this.modelObject.personajeSeleccionado,ubi)				
-			]
+			onClick [ | this.validar(ubi)]
 		]
 	}
 	
@@ -151,15 +150,23 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		]
 	}
 	
-	def validar(Personaje personaje, Ubicacion ubicacion) {
-		try{
-			val Duelo duelo = this.modelObject.jugador.iniciarDuelo(personaje,ubicacion)
-			this.openDialog(new ResultadoDueloWindow(this,new DueloAppModel(duelo)))
+	def validar(Ubicacion ubicacion) {
+		try{			
+			entroPorqueEncontroRival(this.modelObject.obtenerDuelo(ubicacion))
 			}
 		catch (NoHayOponenteException e){
-			this.openDialog(new SinRivalWindow(this,new MrxAppModel(this.modelObject.retador,this.modelObject.jugador.sistema)))
+			entroPorMrX
 		}
+	}	
+	
+	def entroPorqueEncontroRival(Duelo duelo){
+		this.openDialog(new ResultadoDueloWindow(this,new DueloAppModel(duelo)))
 	}
+	
+	def entroPorMrX(){
+		this.openDialog(new SinRivalWindow(this,new MrxAppModel(this.modelObject.retador,this.modelObject.jugador.sistema)))
+	}
+	
 	
 	def openDialog(SimpleWindow <?> window){
 		window.open

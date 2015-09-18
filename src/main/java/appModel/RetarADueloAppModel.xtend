@@ -9,6 +9,7 @@ import domain.Jugador
 import domain.Ubicacion
 import domain.Retador
 import domain.Iniciador
+import domain.Duelo
 
 @Accessors
 @Observable
@@ -81,6 +82,10 @@ class RetarADueloAppModel {
 	
 	def retador() {
 		new Retador(this.jugador,personajeSeleccionado,ubicacionSeleccionada, new Iniciador)
+	}
+	
+	def obtenerDuelo(Ubicacion ubicacion) {
+		this.jugador.iniciarDuelo(personajeSeleccionado,ubicacion)
 	}
 	
 //	def setPersonajeSeleccionado(Personaje p){

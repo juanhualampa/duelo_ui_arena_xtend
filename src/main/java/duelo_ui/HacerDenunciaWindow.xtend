@@ -54,7 +54,7 @@ class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 			caption = " Denunciar "
 			onClick [ | this.generarDenuncia() ]	
 			bindEnabled(new NotNullObservable("unMotivo"))
-			bindEnabled(new NotNullObservable("palabrasDescripcion"))		
+			//bindEnabled(new NotNullObservable("palabrasDescripcion"))		
 			bindEnabledToProperty("puedeDenunciar")
 			disableOnError			
 		]		

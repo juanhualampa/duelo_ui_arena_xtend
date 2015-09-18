@@ -19,7 +19,7 @@ class ResultadoDueloWindow extends SimpleWindow<DueloAppModel>{
 	
 	new(WindowOwner parent, DueloAppModel duelo) {
 		super(parent, duelo)
-		title = duelo.nombreRetador + " VS " + duelo.nombreRetador 
+		title = duelo.nombreRetador + " vs " + duelo.nombreRetado
 	}
 	
 	override protected createFormPanel(Panel mainPanel) {
