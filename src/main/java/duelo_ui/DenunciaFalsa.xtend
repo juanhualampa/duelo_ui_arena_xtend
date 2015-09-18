@@ -1,11 +1,11 @@
 package duelo_ui
 
-import domain.Retador
 import org.uqbar.arena.windows.WindowOwner
+import domain.Jugador
 
 class DenunciaFalsa extends DenunciaTemplate{
 	
-	new(WindowOwner owner, Retador retado) {
-		super(owner, retado, "HAS SIDO SANCIONADO", "Hemos detectado que tu denuncia no tiene fundamentos solidos")
+	new(WindowOwner owner, Jugador jugador) {
+		super(owner, jugador, "HAS SIDO SANCIONADO", "Hemos detectado que tu denuncia no tiene fundamentos solidos")
 	}
 }

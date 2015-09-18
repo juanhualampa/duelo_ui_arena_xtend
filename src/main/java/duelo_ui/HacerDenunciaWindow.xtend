@@ -3,7 +3,6 @@ package duelo_ui
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 import org.uqbar.arena.widgets.Panel
-import domain.Denuncia
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.widgets.TextBox
@@ -11,10 +10,11 @@ import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Selector
 import org.uqbar.arena.bindings.PropertyAdapter
 import domain.Motivo
+import appModels.DenunciaAppModel
 
-class HacerDenunciaWindow extends SimpleWindow<Denuncia>{
+class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 	
-	new(WindowOwner parent, Denuncia model) {
+	new(WindowOwner parent, DenunciaAppModel model) {
 		super(parent, model)
 		title = "DENUNCIAS"
 		taskDescription = "Hacer denuncia"
@@ -24,7 +24,7 @@ class HacerDenunciaWindow extends SimpleWindow<Denuncia>{
 		new Panel(mainPanel) => [
 			layout = new ColumnLayout(2)
 			new Label(it).setText("Estas queriendo denunciar a: ")			
-			new Label(it).bindValueToProperty("contexto.retado.jugador.nombre")
+			new Label(it).bindValueToProperty("denunciado.nombre")
 			
 			new Label(it).setText("Motivo: ")	
 			new Selector(it) => [
@@ -36,7 +36,7 @@ class HacerDenunciaWindow extends SimpleWindow<Denuncia>{
 						
 			new Label(it).setText("Detalles:")			
 			new TextBox(it) => [
-				 bindValueToProperty("unaDescripcion.palabras")
+				 bindValueToProperty("palabrasDescripcion")
 				 width = 230
 				 height =20
 			]
@@ -59,11 +59,14 @@ class HacerDenunciaWindow extends SimpleWindow<Denuncia>{
 	
 	def generarDenuncia() {
 		//chequear que haya seleccionado algo en el Selector
-		
-		if(this.modelObject.calcularValidez()){
-			this.openDialog(new DenunciaVerdadera(this,modelObject.contexto.retado))
-		}else{
-			this.openDialog(new DenunciaFalsa(this,modelObject.contexto.retador))
+		// TODO MUY LINDO PERO HAY QUE EFECTIVIZAR LA DENUNCIA !!!
+		if(this.modelObject.calcularValidez())
+		{
+			this.openDialog(new DenunciaVerdadera(this,modelObject.denunciado))	
+		}
+		else
+		{
+			this.openDialog(new DenunciaFalsa(this,modelObject.denunciado))
 		}
 	}
 	

@@ -8,6 +8,11 @@ import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.widgets.Label
 import java.awt.Color
 import appModels.DueloAppModel
+import org.uqbar.arena.widgets.Button
+import org.uqbar.lacar.ui.model.Action
+import org.uqbar.arena.actions.MessageSend
+import domain.Denuncia
+import appModels.DenunciaAppModel
 
 class ResultadoDueloWindow extends SimpleWindow<DueloAppModel>{
 	
@@ -67,9 +72,22 @@ class ResultadoDueloWindow extends SimpleWindow<DueloAppModel>{
 	    ]
 	}
 	
+	def crearButtonParaAcciones(Panel panel , String aCaption , Action act){
+		new Button(panel) => [
+			caption = aCaption
+			setAsDefault
+			//onClick [ | this.close()]
+			onClick = act
+		]
+	}
 	
-	override protected addActions(Panel arg0) {
-		
+	override protected addActions(Panel panel) {
+		crearButtonParaAcciones(panel," Aceptar derrota con Honor " , new MessageSend(this,"close"))
+		crearButtonParaAcciones(panel," Denunciar Actitud Antideportiva" , new MessageSend(this,"denunciar"))
+	}
+	
+	def denunciar(){
+		new HacerDenunciaWindow(this,new DenunciaAppModel(this.modelObject.duelo)).open
 	}
 	
 }

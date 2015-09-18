@@ -7,13 +7,14 @@ import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.widgets.Button
+import domain.Jugador
 
-class DenunciaTemplate extends SimpleWindow<Retador>{
+class DenunciaTemplate extends SimpleWindow<Jugador>{
 	
 	String mensaje
 	
-	new(WindowOwner owner, Retador retado, String titulo, String msj) {
-		super(owner, retado)
+	new(WindowOwner owner, Jugador jugador, String titulo, String msj) {
+		super(owner, jugador)
 		title = titulo
 		mensaje = msj
 	}
