@@ -1,7 +1,6 @@
 package duelo_ui
 
 import org.uqbar.arena.windows.SimpleWindow
-import domain.Duelo
 import org.uqbar.arena.windows.WindowOwner
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.layout.ColumnLayout
@@ -11,7 +10,6 @@ import appModels.DueloAppModel
 import org.uqbar.arena.widgets.Button
 import org.uqbar.lacar.ui.model.Action
 import org.uqbar.arena.actions.MessageSend
-import domain.Denuncia
 import appModels.DenunciaAppModel
 
 class ResultadoDueloWindow extends SimpleWindow<DueloAppModel>{

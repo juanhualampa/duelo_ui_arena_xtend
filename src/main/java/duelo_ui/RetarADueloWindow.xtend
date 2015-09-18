@@ -151,8 +151,9 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	}
 	
 	def validar(Ubicacion ubicacion) {
+		this.modelObject.ubicacionSeleccionada = ubicacion
 		try{			
-			entroPorqueEncontroRival(this.modelObject.obtenerDuelo(ubicacion))
+			entroPorqueEncontroRival(this.modelObject.obtenerDuelo(modelObject.ubicacionSeleccionada))
 			}
 		catch (NoHayOponenteException e){
 			entroPorMrX

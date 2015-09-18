@@ -9,7 +9,6 @@ import domain.Jugador
 import domain.Ubicacion
 import domain.Retador
 import domain.Iniciador
-import domain.Duelo
 
 @Accessors
 @Observable

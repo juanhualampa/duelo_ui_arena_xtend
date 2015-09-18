@@ -1,13 +1,13 @@
 package duelo_ui
 
 import org.uqbar.arena.windows.SimpleWindow
-import domain.Retador
 import org.uqbar.arena.windows.WindowOwner
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Button
 import appModel.MrxAppModel
+import appModels.DueloAppModel
 
 class SinRivalWindow extends SimpleWindow<MrxAppModel>{
 	
@@ -21,7 +21,7 @@ class SinRivalWindow extends SimpleWindow<MrxAppModel>{
 		new Button(denunciasPanel) => [
 			caption = "Retar MR-X!!!"
 			setAsDefault
-			onClick [ | this.modelObject.realizarDuelo]
+			onClick [ | this.displayStatistics]
 			
 		]
 		
@@ -31,6 +31,15 @@ class SinRivalWindow extends SimpleWindow<MrxAppModel>{
 			onClick [ |  this.close]
 			
 		]
+	}
+	
+	def displayStatistics() {
+		val duelo = this.modelObject.realizarDuelo
+		this.openDialog(new ResultadoDueloWindow(this,new DueloAppModel(duelo)))
+	}
+	
+	def openDialog(SimpleWindow <?> window){
+		window.open
 	}
 	
 	override protected createFormPanel(Panel mainPanel) {
