@@ -15,7 +15,6 @@ import domain.Iniciador
 class RetarADueloAppModel {
 	
 	String personajeABuscar
-//	Personaje personajeSeleccionado
 	Jugador jugador
 	PersonajePuntaje personajeConPuntaje
 	
@@ -24,8 +23,6 @@ class RetarADueloAppModel {
 	new(Jugador jugador){
 		personajeABuscar = "";
 		this.jugador = jugador
-		//this.personajesConPuntaje = this.jugador.estadisticasPersonajes.map[new PersonajePuntaje(it.personaje, it.calificacion.nro)]
-		
 	}	
 	
 	def Personaje getPersonajeSeleccionado(){
@@ -36,11 +33,16 @@ class RetarADueloAppModel {
 		#[Ubicacion.TOP,Ubicacion.MIDDLE,Ubicacion.JUNGLE,Ubicacion.BOTTOM]
 	}
 	
-	def setPersonajeABuscar(String s){
-		ObservableUtils.firePropertyChanged(this,"personajesConPuntaje")
+	def setPersonajeABuscar(String nombre){
+		personajeABuscar = nombre
+		ObservableUtils.firePropertyChanged(this,"personajesConPuntaje",this.personajesConPuntaje)
 	}
 	
-	def List<PersonajePuntaje> personajesConPuntaje(){
+	def setPersonajesConPuntajes(List<PersonajePuntaje> p){
+		p
+	}
+	
+	def List<PersonajePuntaje> getPersonajesConPuntaje(){
 		val personajesConPuntaje = this.jugador.estadisticasPersonajes.map[new PersonajePuntaje(it.personaje, it.calificacion.nro)]
 		if (personajeABuscar != ""){			
 			personajesConPuntaje.filter[it.personaje.nombre.contains(personajeABuscar)].toList
@@ -56,7 +58,6 @@ class RetarADueloAppModel {
 	}
 	
 	def EstadisticasPersonajes getEstadisticaPersonajeSeleccionado(){
-		//estadisticaPersonajeSeleccionado = 
 		if (personajeConPuntaje == null){
 			jugador.estadisticasPersonajes.get(0)
 		}
@@ -86,14 +87,5 @@ class RetarADueloAppModel {
 	def obtenerDuelo(Ubicacion ubicacion) {
 		this.jugador.iniciarDuelo(personajeSeleccionado,ubicacion)
 	}
-	
-//	def setPersonajeSeleccionado(Personaje p){
-//		for(EstadisticasPersonajes ep : this.estadisticasPersonajes){
-//			if(ep.personaje.nombre.equals(personajeSeleccionado.nombre)){
-//				this.estadisticaPersonajeSeleccionado = ep
-//				ObservableUtils.firePropertyChanged(this,"estadisticaPersonajeSeleccionado",this.estadisticaPersonajeSeleccionado)
-//			}
-//		}
-//	}
 
 }

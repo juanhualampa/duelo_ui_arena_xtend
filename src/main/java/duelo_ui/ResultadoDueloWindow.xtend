@@ -1,6 +1,5 @@
 package duelo_ui
 
-import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.layout.ColumnLayout
@@ -11,9 +10,9 @@ import org.uqbar.arena.widgets.Button
 import org.uqbar.lacar.ui.model.Action
 import org.uqbar.arena.actions.MessageSend
 import appModels.DenunciaAppModel
+import org.uqbar.arena.aop.windows.TransactionalDialog
 
-class ResultadoDueloWindow extends SimpleWindow<DueloAppModel>{
-	
+class ResultadoDueloWindow extends TransactionalDialog<DueloAppModel>{
 	
 	new(WindowOwner parent, DueloAppModel duelo) {
 		super(parent, duelo)
@@ -22,7 +21,7 @@ class ResultadoDueloWindow extends SimpleWindow<DueloAppModel>{
 	
 	override protected createFormPanel(Panel mainPanel) {
 		new Panel(mainPanel) =>[			
-			new Label(it) => [ text = this.modelObject.visualizateParteSuperior fontSize = 18  background = Color.BLUE]
+			new Label(it) => [ text = this.modelObject.title fontSize = 18  background = Color.BLUE]
 			crearPanel(mainPanel)
 		]
 	}
@@ -38,7 +37,7 @@ class ResultadoDueloWindow extends SimpleWindow<DueloAppModel>{
 	
 	def crearParteInf(Panel panel) {
 		new Panel(panel) =>[
-			new Label(it) => [ text = this.modelObject.visualizateParteInferior fontSize = 18  background = Color.BLUE]
+			new Label(it) => [ text = this.modelObject.copete fontSize = 18  background = Color.BLUE]
 		]
 	}
 	
@@ -80,7 +79,7 @@ class ResultadoDueloWindow extends SimpleWindow<DueloAppModel>{
 	}
 	
 	override protected addActions(Panel panel) {
-		crearButtonParaAcciones(panel," Aceptar derrota con Honor " , new MessageSend(this,"close"))
+		crearButtonParaAcciones(panel,this.modelObject.msj , new MessageSend(this,"cancel"))
 		crearButtonParaAcciones(panel," Denunciar Actitud Antideportiva" , new MessageSend(this,"denunciar"))
 	}
 	

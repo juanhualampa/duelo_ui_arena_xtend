@@ -8,8 +8,9 @@ import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Button
 import appModel.MrxAppModel
 import appModels.DueloAppModel
+import org.uqbar.arena.aop.windows.TransactionalDialog
 
-class SinRivalWindow extends SimpleWindow<MrxAppModel>{
+class SinRivalWindow extends TransactionalDialog<MrxAppModel>{
 	
 	new(WindowOwner parent, MrxAppModel model) {
 		super(parent, model)
@@ -21,20 +22,22 @@ class SinRivalWindow extends SimpleWindow<MrxAppModel>{
 		new Button(denunciasPanel) => [
 			caption = "Retar MR-X!!!"
 			setAsDefault
-			onClick [ | this.displayStatistics]
-			
+			onClick [ | this.displayStatistics]			
 		]
 		
 		new Button(denunciasPanel) => [
 			caption = "Descansar en mi gloria"
 			setAsDefault
-			onClick [ |  this.close]
+			onClick [ |  this.cancel]
 			
 		]
 	}
 	
 	def displayStatistics() {
 		val duelo = this.modelObject.realizarDuelo
+		/*
+		 * if 
+		 */
 		this.openDialog(new ResultadoDueloWindow(this,new DueloAppModel(duelo)))
 	}
 	
