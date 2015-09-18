@@ -104,7 +104,6 @@ class RetarADueloApplication extends Application{
 		var Jugador jugador = new Jugador("SuperHijitus",sis,estadisticasPersonajes);
 		
 		var RetarADueloAppModel retAppModel = new RetarADueloAppModel(jugador)
-		
 		new RetarADueloWindow(this,retAppModel)
 	}
 	

@@ -12,7 +12,6 @@ import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.widgets.List
 import org.uqbar.arena.widgets.Button
 import domain.Ubicacion
-import domain.EstadisticasPersonajes
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.layout.HorizontalLayout
 import appModel.PersonajePuntaje
@@ -20,11 +19,8 @@ import domain.NoHayOponenteException
 import domain.Personaje
 import domain.Retador
 import domain.Iniciador
-import org.uqbar.arena.windows.Dialog
-import domain.Resultado
 import domain.Duelo
 import appModel.MrxAppModel
-import org.uqbar.arena.widgets.Selector
 import java.awt.Color
 
 class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
@@ -35,151 +31,119 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		taskDescription  = "Bienvenido: Desde esta página podrás elegir un personaje batirte a duelo con otro jugador"
 	}
 	
-	
-	
 	override protected createFormPanel(Panel mainPanel) {
-		new Label(mainPanel).text = "Selecciona tu personaje para el duelo"
-		val paneles = new Panel(mainPanel)
-		paneles.layout= new HorizontalLayout()
+		new Label(mainPanel).text = "Selecciona tu personaje para el duelo"		
+		new Panel(mainPanel) => [	
+			layout = new HorizontalLayout
+			crearPanelIzquierdo(it)
+			crearPanelCentral(it)
+			crearPanelDerecho(it)
+		]
+	}
+	
+	def crearPanelDerecho(Panel panel) {
+		new Panel(panel) => [
+			layout = new VerticalLayout()
+			this.estadisticas(it)
+		]
+	}
+	
+	def crearPanelCentral(Panel panel) {
+		new Panel(panel) => [
+			layout = new VerticalLayout()
+			new Label(it).setText("No hay personaje seleccionado")
+			.bindValueToProperty("personajeConPuntaje.personaje")
+			this.datosPersonaje(it)
+		]
+	}
 		
-		val panelIzquierdo = new Panel(paneles)
-		panelIzquierdo.layout = new VerticalLayout()
-		this.buscarPersonaje(panelIzquierdo)
-		this.personajesYPuntaje(panelIzquierdo)
-		
-		val panelCentral = new Panel(paneles)
-		panelCentral.layout = new VerticalLayout()
-		new Label(panelCentral).setText("No hay personaje seleccionado")
-		.bindValueToProperty("personajeConPuntaje.personaje")
-		
-		this.datosPersonaje(panelCentral, this.modelObject.getEstadisticaPersonajeSeleccionado())
-		val panelDerecho = new Panel(paneles)
-		panelDerecho.layout = new VerticalLayout()
-		
-		this.estadisticas(panelDerecho, this.modelObject)
+	def crearPanelIzquierdo(Panel panel) {
+		new Panel(panel) =>[
+			layout = new VerticalLayout()
+		this.buscarPersonaje(it)
+		this.personajesYPuntaje(it)
+		]
 	}
 	
 	def buscarPersonaje(Panel mainPanel) {
-		val buscarPanel = new Panel(mainPanel)
-		buscarPanel.layout = new ColumnLayout(2)
-		
-		new Label(buscarPanel).setText("Personaje Buscado")
-		new TextBox(buscarPanel).bindValueToProperty("personajeABuscar") 
-		
+		new Panel(mainPanel) => [
+			layout = new ColumnLayout(2)
+			new Label(it).setText("Personaje Buscado")
+			new TextBox(it).bindValueToProperty("personajeABuscar") 
+		]		
 	}
 	
+	def crearCaracteristicaPersonaje(Panel panel , String titulo , String property){
+		new Label(panel).setText(titulo)
+		new List(panel) => [
+	            bindItemsToProperty(property)
+	            width = 100
+	            height =100
+	        ]
+	}
 	
-	def datosPersonaje(Panel panel, EstadisticasPersonajes est) {
-		val especialidadesPanel = new Panel(panel)
-		new Label(especialidadesPanel).setText("Especialidades")
-		especialidadesPanel.layout = new VerticalLayout()
-		
-		new List(especialidadesPanel) => [
-            bindItemsToProperty("personajeConPuntaje.personaje.especialidades")
-            width = 100
-            height =100
-        ]
-      		
-	  	new Label(especialidadesPanel).setText("Debilidades")
-		
-      	new List(especialidadesPanel) => [
-            bindItemsToProperty("personajeConPuntaje.personaje.debilidades")
-            width = 100
-            height = 100
-      	]
-      
-      	new Label(especialidadesPanel).setText("Mejor Posicion")
-      
-      	new Label(especialidadesPanel) => [
-            bindValueToProperty("personajeConPuntaje.personaje.ubicacionIdeal")
-            background = Color.white
-      	]
+	def datosPersonaje(Panel panel) {		
+		new Panel(panel) =>[			
+			layout = new VerticalLayout()
+			crearCaracteristicaPersonaje(it ,"Especialidades","personajeConPuntaje.personaje.especialidades")
+			crearCaracteristicaPersonaje(it,"Debilidades","personajeConPuntaje.personaje.debilidades")
+	        crearLabel("Mejor Posicion","personajeConPuntaje.personaje.ubicacionIdeal")
+		]		
 	}	
 	
+	def crearLabel(Panel panel, String texto, String property){
+		new Label(panel).setText(texto)      
+	    new Label(panel) => [
+	            bindValueToProperty(property)
+	    ]
+	}
 	
-	def estadisticas(Panel mainPanel, RetarADueloAppModel personaje) {
-		val estadisticasPanel = new Panel(mainPanel)
-		
-		estadisticasPanel.layout = new ColumnLayout(2)
-		
-		new Label(estadisticasPanel).setText("Jugadas")
-		new Label(estadisticasPanel)
-		.bindValueToProperty("estadisticaPersonajeSeleccionado.vecesUsadoAntesDelDuelo")
-		
-		new Label(estadisticasPanel).setText("Ganadas")
-		new Label(estadisticasPanel)
-		.bindValueToProperty("estadisticaPersonajeSeleccionado.vecesQueGanoDuelo")
-//		
-		new Label(estadisticasPanel).setText("Kills")
-		new Label(estadisticasPanel)
-		.bindValueToProperty("estadisticaPersonajeSeleccionado.vecesKills")
-//		
-		new Label(estadisticasPanel).setText("Deads")
-		new Label(estadisticasPanel)
-		.bindValueToProperty("estadisticaPersonajeSeleccionado.vecesDeads")
-//		
-		new Label(estadisticasPanel).setText("Assists")
-		new Label(estadisticasPanel)
-		.bindValueToProperty("estadisticaPersonajeSeleccionado.vecesAssist")
-//		
-		new Label(estadisticasPanel).setText("Mejor ubicacion")
-		new Label(estadisticasPanel)
-		.bindValueToProperty("estadisticaPersonajeSeleccionado.mejorUbicacion")
-		
-		new Label(estadisticasPanel).setText("Puntaje")
-		new Label(estadisticasPanel)
-		.bindValueToProperty("estadisticaPersonajeSeleccionado.calificacion.nro")
-		
-		
+	def estadisticas(Panel mainPanel) {
+		new Panel(mainPanel) => [
+			layout = new ColumnLayout(2)		
+			crearLabel(it,"Jugadas","estadisticaPersonajeSeleccionado.vecesUsadoAntesDelDuelo")
+			crearLabel(it,"Ganadas","estadisticaPersonajeSeleccionado.vecesQueGanoDuelo")
+			crearLabel(it,"Kills","estadisticaPersonajeSeleccionado.vecesKills")
+			crearLabel(it,"Deads","estadisticaPersonajeSeleccionado.vecesDeads")
+			crearLabel(it,"Assists","estadisticaPersonajeSeleccionado.vecesAssist")
+			crearLabel(it,"Mejor ubicacion","estadisticaPersonajeSeleccionado.mejorUbicacion")
+			crearLabel(it,"Puntaje","estadisticaPersonajeSeleccionado.calificacion.nro")
+		]		
 	}
 		
 	def personajesYPuntaje(Panel panel) {
 		val table = new Table<PersonajePuntaje>(panel, PersonajePuntaje) => [
 			bindItemsToProperty("personajesConPuntaje")
 			bindValueToProperty("personajeConPuntaje")
-		]
+		]		
+		crearColumna(panel,table,"Nombre",50,"personaje")
+		crearColumna(panel,table,"Puntaje",30,"puntaje")
 		
-		new Column<PersonajePuntaje>(table) => [
-			title = "Nombre"
-			fixedSize = 50
-			bindContentsToProperty("personaje")
-		]
+	}
 		
-		new Column<PersonajePuntaje>(table) => [
-			title = "Puntaje"
-			fixedSize = 30
-			bindContentsToProperty("puntaje")
+	def <S> crearColumna(Panel panel, Table<S> table ,String titulo, int size, String property){
+		new Column<S>(table) => [
+			title = titulo
+			fixedSize = size
+			bindContentsToProperty(property)
 		]
 	}
 	
+	def crearButtonParaAcciones(Panel panel, String aCaption , Ubicacion ubi){
+		new Button(panel) => [
+			caption = aCaption
+			setAsDefault
+			onClick [ | this.validar(this.modelObject.personajeSeleccionado,ubi)				
+			]
+		]
+	}
 	
 	override protected addActions(Panel panel) {
 		new Label(panel).setText("JUGAR")
-		
-		new Button(panel) => [
-			caption = "TOP"
-			setAsDefault
-			onClick [ | this.validar(this.modelObject.personajeSeleccionado,Ubicacion.TOP)				
-			]
-		]
-		
-		new Button(panel) => [
-			caption = "BOTTOM"
-			setAsDefault
-			onClick [ | this.validar(this.modelObject.personajeSeleccionado,Ubicacion.BOTTOM) ]
-		]
-		
-		new Button(panel) => [
-			caption = "MIDDLE"
-			setAsDefault
-			onClick [ | this.validar(this.modelObject.personajeSeleccionado,Ubicacion.MIDDLE) ]
-		]
-		
-		new Button(panel) => [
-			caption = "JUNGLE"
-			setAsDefault
-			onClick [ | this.validar(this.modelObject.personajeSeleccionado,Ubicacion.JUNGLE) ]
-		]
+		crearButtonParaAcciones(panel, "TOP" ,Ubicacion.TOP)
+		crearButtonParaAcciones(panel, "BOTTOM" ,Ubicacion.BOTTOM)
+		crearButtonParaAcciones(panel, "MIDDLE" ,Ubicacion.MIDDLE)
+		crearButtonParaAcciones(panel, "JUNGLE" ,Ubicacion.JUNGLE)
 	}
 	
 	def validar(Personaje personaje, Ubicacion ubicacion) {

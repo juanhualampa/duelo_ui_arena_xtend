@@ -13,10 +13,7 @@ import domain.Jugador
 class RetarADueloAppModel {
 	
 	String personajeABuscar
-	List<Personaje>personajes;
 	Personaje personajeSeleccionado
-//	EstadisticasPersonajes estadisticaPersonajeSeleccionado
-	List<EstadisticasPersonajes> estadisticasPersonajes
 	Jugador jugador
 	List<PersonajePuntaje> personajesConPuntaje
 	PersonajePuntaje personajeConPuntaje
@@ -24,9 +21,7 @@ class RetarADueloAppModel {
 	new(Jugador jugador){
 		personajeABuscar = "";
 		this.jugador = jugador
-		this.estadisticasPersonajes = this.jugador.estadisticasPersonajes
-		this.personajes = this.estadisticasPersonajes.map[personaje]
-		this.personajesConPuntaje = estadisticasPersonajes.map[new PersonajePuntaje(it.personaje, it.calificacion.nro)]
+		this.personajesConPuntaje = this.jugador.estadisticasPersonajes.map[new PersonajePuntaje(it.personaje, it.calificacion.nro)]
 		
 	}
 	

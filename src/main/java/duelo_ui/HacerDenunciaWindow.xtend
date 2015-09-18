@@ -21,36 +21,26 @@ class HacerDenunciaWindow extends SimpleWindow<Denuncia>{
 	}
 	
 	override protected createFormPanel(Panel mainPanel) {
-		val denunciasPanel = new Panel(mainPanel)
-		denunciasPanel.layout = new ColumnLayout(2)
-		
-		////////////////////////FILA 1 //////////////////////////
-		new Label(denunciasPanel).setText("Estas queriendo denunciar a: ")
-		
-		new Label(denunciasPanel).bindValueToProperty("contexto.retado.jugador.nombre")
-		
-		////////////////////////FILA 2///////////////////////////
-		
-		new Label(denunciasPanel).setText("Motivo: ")
-
-		new Selector(denunciasPanel) => [
-			allowNull = false
-			bindItemsToProperty("motivosPosibles").adapter = new PropertyAdapter(Motivo,"nombre")
-			//bindItemsToProperty("motivosPosibles")
-			bindValueToProperty("unMotivo")
+		new Panel(mainPanel) => [
+			layout = new ColumnLayout(2)
+			new Label(it).setText("Estas queriendo denunciar a: ")			
+			new Label(it).bindValueToProperty("contexto.retado.jugador.nombre")
+			
+			new Label(it).setText("Motivo: ")	
+			new Selector(it) => [
+				allowNull = false
+				bindItemsToProperty("motivosPosibles").adapter = new PropertyAdapter(Motivo,"nombre")
+				//bindItemsToProperty("motivosPosibles")
+				bindValueToProperty("unMotivo")
+			]
+						
+			new Label(it).setText("Detalles:")			
+			new TextBox(it) => [
+				 bindValueToProperty("unaDescripcion.palabras")
+				 width = 230
+				 height =20
+			]
 		]
-		
-		///////////////////////FILA 3///////////////////////////////
-		
-		new Label(denunciasPanel).setText("Detalles:")
-		
-		new TextBox(denunciasPanel) => [
-			 bindValueToProperty("unaDescripcion.palabras")
-			 width = 230
-			 height =20
-		]
-		
-		/////////////////////////////////////////////////////////////////
 	}
 	
 	override protected addActions(Panel denunciasPanel) {
@@ -59,14 +49,12 @@ class HacerDenunciaWindow extends SimpleWindow<Denuncia>{
 			setAsDefault
 			onClick [ | this.generarDenuncia() ]
 			
-		]
-		
+		]		
 		new Button(denunciasPanel) => [
 			caption = " Cancelar "
 			setAsDefault
 			onClick [ | this.close() ]
-		]
-	
+		]	
 	}
 	
 	def generarDenuncia() {
