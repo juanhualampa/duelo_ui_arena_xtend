@@ -12,6 +12,12 @@ import domain.Sistema
 import domain.EstadisticasPersonajes
 import java.util.Arrays
 import domain.Calificacion
+import duelo_ui.ResultadoDueloWindow
+import domain.Duelo
+import domain.Retador
+import domain.Iniciador
+import domain.NoIniciador
+import appModels.DueloAppModel
 
 class RetarADueloApplication extends Application{
 	
@@ -104,7 +110,10 @@ class RetarADueloApplication extends Application{
 		var Jugador jugador = new Jugador("SuperHijitus",sis,estadisticasPersonajes);
 		
 		var RetarADueloAppModel retAppModel = new RetarADueloAppModel(jugador)
-		new RetarADueloWindow(this,retAppModel)
+		//new RetarADueloWindow(this,retAppModel)
+		
+		
+		new ResultadoDueloWindow(this,new DueloAppModel(sis.realizarDuelo(new Retador(jugador, personaje1,ubi1,new Iniciador),new Retador(jugador, personaje1,ubi1,new NoIniciador))))
 	}
 	
 	def static main(String[] args) {

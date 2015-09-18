@@ -22,6 +22,7 @@ import domain.Iniciador
 import domain.Duelo
 import appModel.MrxAppModel
 import java.awt.Color
+import appModels.DueloAppModel
 
 class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	
@@ -149,7 +150,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	def validar(Personaje personaje, Ubicacion ubicacion) {
 		try{
 			val Duelo duelo = this.modelObject.jugador.iniciarDuelo(personaje,ubicacion)
-			this.openDialog(new ResultadoDueloWindow(this,duelo))
+			this.openDialog(new ResultadoDueloWindow(this,new DueloAppModel(duelo)))
 			}
 		catch (NoHayOponenteException e){
 			this.openDialog(new SinRivalWindow(this,new MrxAppModel (new Retador(this.modelObject.jugador,personaje,ubicacion, new Iniciador),this.modelObject.jugador.sistema)))
