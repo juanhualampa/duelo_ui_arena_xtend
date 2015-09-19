@@ -33,7 +33,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	}
 	
 	override protected createFormPanel(Panel mainPanel) {
-		new Label(mainPanel).text = "Selecciona tu personaje para el duelo"		
+		crearLabelConColorYTamanio(mainPanel,"Selecciona tu personaje para el duelo",18,Color.WHITE,Color.BLACK)
 		new Panel(mainPanel) => [	
 			layout = new HorizontalLayout
 			crearPanelIzquierdo(it)
@@ -49,21 +49,23 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		this.personajesYPuntaje(it)
 		]
 	}
-	
-	
+		
 	def crearPanelCentral(Panel panel) {
 		new Panel(panel) => [
 			layout = new VerticalLayout()
-			new Label(it).setText("No hay personaje seleccionado")
+			new Label(it).setForeground(Color.BLUE).setFontSize(18)
 			.bindValueToProperty("personajeConPuntaje.personaje")
-			this.datosPersonaje(it)
+			this.datosPersonaje(it)			
 		]
 	}
 	
 	def crearPanelDerecho(Panel panel) {
-		new Panel(panel) => [
-			layout = new VerticalLayout()
+		
+		new Panel(panel) => [			
+			layout = new VerticalLayout()		
+			new Label(it).setText("STATS").setForeground(Color.BLUE).setFontSize(18)		
 			this.estadisticas(it)
+			this.botonera(it)
 		]
 	}
 	
@@ -89,15 +91,22 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 			layout = new VerticalLayout()
 			crearCaracteristicaPersonaje(it ,"Especialidades","personajeConPuntaje.personaje.especialidades")
 			crearCaracteristicaPersonaje(it,"Debilidades","personajeConPuntaje.personaje.debilidades")
-	        crearLabel("Mejor Posicion","personajeConPuntaje.personaje.ubicacionIdeal")
+	        crearLabelConColor(it,"Mejor Posicion","personajeConPuntaje.personaje.ubicacionIdeal",Color.WHITE)
 		]		
+	}
+	
+	def crearLabelConColor(Panel panel, String texto, String property, Color color) {
+		new Label(panel).setText(texto)
+	    new Label(panel).setBackground(color).bindValueToProperty(property)
 	}	
 	
+	def crearLabelConColorYTamanio(Panel panel, String texto, int i, Color colorTexto, Color colorFondo ) {
+		new Label(panel).setText(texto).setForeground(colorTexto).setBackground(colorFondo).setFontSize(i)
+	}
+	
 	def crearLabel(Panel panel, String texto, String property){
-		new Label(panel).setText(texto)      
-	    new Label(panel) => [
-	            bindValueToProperty(property)
-	    ]
+		new Label(panel).setText(texto)
+	    new Label(panel).bindValueToProperty(property)
 	}
 	
 	def estadisticas(Panel mainPanel) {
@@ -144,11 +153,20 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		]
 	}
 	
-	override protected addActions(Panel panel) {
-		new Label(panel).setText("JUGAR")
-		this.modelObject.ubicacionesPosibles.forEach[
+	override protected addActions(Panel panel) {}
+	
+	def botonera(Panel panel){
+		new Label(panel).setText("JUGAR").setForeground(Color.BLUE).setFontSize(18)
+		new Panel(panel) =>[
+			layout = new ColumnLayout(2)
+			this.modelObject.ubicacionesPosibles.forEach[
 			crearButtonParaAcciones(panel, it.toString ,it)
 		]
+		]
+//		new Label(panel).setText("JUGAR")
+//		this.modelObject.ubicacionesPosibles.forEach[
+//			crearButtonParaAcciones(panel, it.toString ,it)
+//		]
 	}
 	
 	def validar(Ubicacion ubicacion) {
