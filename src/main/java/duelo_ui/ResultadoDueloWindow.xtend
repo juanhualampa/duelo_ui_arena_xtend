@@ -73,8 +73,8 @@ class ResultadoDueloWindow extends TransactionalDialog<DueloAppModel>{
 		new Button(panel) => [
 			caption = aCaption
 			setAsDefault
-			//onClick [ | this.close()]
-			onClick = act
+			onClick [ | this.close()]
+			//onClick = act
 		]
 	}
 	

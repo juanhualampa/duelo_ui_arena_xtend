@@ -23,7 +23,11 @@ class RetarADueloAppModel {
 	new(Jugador jugador){
 		personajeABuscar = "";
 		this.jugador = jugador
-	}	
+	}
+	
+	def isEligioPersonaje(){
+		 personajeConPuntaje != null
+	}
 	
 	def Personaje getPersonajeSeleccionado(){
 		personajeConPuntaje.personaje
@@ -31,6 +35,15 @@ class RetarADueloAppModel {
 	
 	def ubicacionesPosibles(){
 		#[Ubicacion.TOP,Ubicacion.MIDDLE,Ubicacion.JUNGLE,Ubicacion.BOTTOM]
+	}
+	
+	def void setPersonajeConPuntaje(PersonajePuntaje per) {
+		this.personajeConPuntaje = per
+		cambioPuedeJugar
+	}
+	
+	def cambioPuedeJugar(){
+		ObservableUtils.firePropertyChanged(this, "eligioPersonaje", this.eligioPersonaje)
 	}
 	
 	def setPersonajeABuscar(String nombre){
@@ -52,10 +65,10 @@ class RetarADueloAppModel {
 		}		
 	}
 	
-	def void setPersonajeConPuntaje(PersonajePuntaje p){
-		this.personajeConPuntaje = p
-		ObservableUtils.firePropertyChanged(this,"estadisticaPersonajeSeleccionado")
-	}
+//	def void setPersonajeConPuntaje(PersonajePuntaje p){
+//		this.personajeConPuntaje = p
+//		ObservableUtils.firePropertyChanged(this,"estadisticaPersonajeSeleccionado")
+//	}
 	
 	def EstadisticasPersonajes getEstadisticaPersonajeSeleccionado(){
 		if (personajeConPuntaje == null){

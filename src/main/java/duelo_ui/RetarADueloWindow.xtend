@@ -139,6 +139,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		new Button(panel) => [
 			caption = aCaption
 			setAsDefault
+			bindEnabledToProperty("eligioPersonaje")
 			onClick [ | this.validar(ubi)]
 		]
 	}
