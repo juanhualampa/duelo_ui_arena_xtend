@@ -2,7 +2,6 @@ package applications_para_probar
 
 import org.uqbar.arena.Application
 import duelo_ui.RetarADueloWindow
-import appModel.RetarADueloAppModel
 import java.util.List
 import domain.Personaje
 import java.util.ArrayList
@@ -18,6 +17,7 @@ import domain.Retador
 import domain.Iniciador
 import domain.NoIniciador
 import appModels.DueloAppModel
+import appModels.RetarADueloAppModel
 
 class RetarADueloApplication extends Application{
 	

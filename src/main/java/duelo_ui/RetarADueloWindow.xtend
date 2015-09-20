@@ -2,7 +2,6 @@ package duelo_ui
 
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
-import appModel.RetarADueloAppModel
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.layout.ColumnLayout
@@ -14,15 +13,16 @@ import org.uqbar.arena.widgets.Button
 import domain.Ubicacion
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.layout.HorizontalLayout
-import appModel.PersonajePuntaje
 import domain.NoHayOponenteException
 import domain.Personaje
 import domain.Retador
 import domain.Iniciador
 import domain.Duelo
-import appModel.MrxAppModel
 import java.awt.Color
 import appModels.DueloAppModel
+import appModels.PersonajePuntaje
+import appModels.MrxAppModel
+import appModels.RetarADueloAppModel
 
 class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	
@@ -91,7 +91,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 			layout = new VerticalLayout()
 			crearCaracteristicaPersonaje(it ,"Especialidades","personajeConPuntaje.personaje.especialidades")
 			crearCaracteristicaPersonaje(it,"Debilidades","personajeConPuntaje.personaje.debilidades")
-	        crearLabelConColor(it,"Mejor Posicion","personajeConPuntaje.personaje.ubicacionIdeal",Color.WHITE)
+	        crearLabelConColor(it,"Ubicacion Ideal","personajeConPuntaje.personaje.ubicacionIdeal",Color.WHITE)
 		]		
 	}
 	
@@ -121,7 +121,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 			crearLabel(it,"Deads","estadisticaPersonajeSeleccionado.vecesDeads")
 			crearLabel(it,"Assists","estadisticaPersonajeSeleccionado.vecesAssist")
 			crearLabel(it,"Mejor ubicacion","estadisticaPersonajeSeleccionado.mejorUbicacion")
-			crearLabel(it,"Puntaje","estadisticaPersonajeSeleccionado.calificacion.nro")
+			crearLabel(it,"Puntaje","estadisticaPersonajeSeleccionado.calificacion.categoria")
 		]		
 	}
 		

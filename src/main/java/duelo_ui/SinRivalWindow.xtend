@@ -6,9 +6,9 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Button
-import appModel.MrxAppModel
 import appModels.DueloAppModel
 import org.uqbar.arena.aop.windows.TransactionalDialog
+import appModels.MrxAppModel
 
 class SinRivalWindow extends TransactionalDialog<MrxAppModel>{
 	

@@ -12,6 +12,7 @@ import org.uqbar.arena.bindings.PropertyAdapter
 import domain.Motivo
 import appModels.DenunciaAppModel
 import org.uqbar.arena.bindings.NotNullObservable
+import org.uqbar.arena.layout.HorizontalLayout
 
 class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 	
@@ -22,7 +23,12 @@ class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 	}
 	
 	override protected createFormPanel(Panel mainPanel) {
-		new Panel(mainPanel) => [
+		denunciaDisplay(mainPanel)
+		botonera(mainPanel)
+	}
+	
+	def denunciaDisplay(Panel panel){
+			new Panel(panel) => [
 			layout = new ColumnLayout(2)
 			new Label(it).setText("Estas queriendo denunciar a: ")			
 			new Label(it).bindValueToProperty("denunciado.nombre")
@@ -44,22 +50,27 @@ class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 		]
 	}
 	
-	override protected addActions(Panel denunciasPanel) {
-		new Button(denunciasPanel) => [
-			caption = " Cancelar "
-			setAsDefault
-			onClick [ | this.close() ]
-		]
-		new Button(denunciasPanel) => [
+	def botonera(Panel panel){
+		new Panel(panel) => [
+			layout = new HorizontalLayout
+			
+			new Button(it) => [
 			caption = " Denunciar "
-			onClick [ | this.generarDenuncia() ]	
-			bindEnabled(new NotNullObservable("unMotivo"))
+			onClick [ | this.generarDenuncia() ]
+				
+			//bindEnabled(new NotNullObservable("unMotivo"))
 			//bindEnabled(new NotNullObservable("palabrasDescripcion"))		
 			bindEnabledToProperty("puedeDenunciar")
-			disableOnError			
-		]		
-		
-			
+			]
+			new Button(it) => [
+			setAsDefault
+			caption = " Cancelar "
+			onClick [ | this.close() ]
+			]	
+		]
+	}
+	
+	override protected addActions(Panel denunciasPanel) {
 	}
 	
 	def generarDenuncia() {
