@@ -79,23 +79,58 @@ class RetarADueloApplication extends Application{
 		ubicacionesUsadas.addAll(Arrays.asList(ubi1,ubi2,ubi1,ubi2))
 		
 		///////////////CREO PERSONAJES/////////////////////////
-		var Personaje personaje1 = new Personaje("PEPITO1",esp1,deb1,ubi1);		
-		var Personaje personaje2 = new Personaje("PEPITO2",esp2,deb2,ubi2);		
-		var Personaje personaje3 = new Personaje("PEPITO3",esp3,deb3,ubi1);		
-		var Personaje personaje4 = new Personaje("PEPITO4",esp4,deb4,ubi3);		
-		var Personaje personaje5 = new Personaje("PEPITO5",esp5,deb5,ubi4);
+		var Personaje personaje1 = new Personaje("El Chelo",esp1,deb1,ubi1);		
+		var Personaje personaje2 = new Personaje("Javito",esp2,deb2,ubi2);		
+		var Personaje personaje3 = new Personaje("Ariel Pucheta",esp3,deb3,ubi1);		
+		var Personaje personaje4 = new Personaje("Pablo Lescano",esp4,deb4,ubi3);		
+		var Personaje personaje5 = new Personaje("Leo Mattioli",esp5,deb5,ubi4);
+		var Personaje personaje0 = new Personaje("El Polaco",esp1,deb2,ubi3);
 		
 		/// LE DOY UNA CALIFICACION INICIAL /////////////////////////
+		val calRampage = new Calificacion("RAMPAGE",100)
+		val calDominador = new Calificacion("DOMINADOR",75)
+		val calKiller = new Calificacion("KILLING_SPREAD",60)
+		val calManco = new Calificacion("MANCO",15)
+		val calNoob = new Calificacion("NOOB",5)
 		
-		val calPerdedora = new Calificacion("NOOB",5)
-		val calRampage = new Calificacion("NOOB",5)
+		/**
+		 * new(Personaje personaje,int vecesUsadoAntesDelDuelo, 
+		int vecesQueGanoDuelo, int vecesKills, int vecesDeads,
+		 int vecesAssist , List<Ubicacion> ubicacionesUsadas,
+		 Ubicacion mejorUbicacion, Calificacion calificacion ){
+		this.personaje = personaje
+		this.vecesUsadoAntesDelDuelo = vecesUsadoAntesDelDuelo
+		this.vecesQueGanoDuelo = vecesQueGanoDuelo
+		this.vecesKills = vecesKills
+		this.vecesDeads = vecesDeads
+		this.vecesAssist = vecesAssist
+		this.ubicacionesUsadas = ubicacionesUsadas	
+		this.mejorUbicacion = mejorUbicacion
+		this.calificacion = calificacion	
+	}
+		 */
 		///////////////////////CREO ESTADISTICAS PARA PERSONAJES //////////////////////////////
+		val ubicacionesUsadas1 = new ArrayList<Ubicacion>
+		ubicacionesUsadas1.addAll(Arrays.asList(ubi1, ubi1, ubi1, ubi1, ubi1, ubi1, ubi2))
+		val est1 = new EstadisticasPersonajes(personaje1, 7, 6, 5, 4, 3, ubicacionesUsadas1, ubi1,calRampage)
 		
-		val est1 = new EstadisticasPersonajes(personaje1,10,4, 3, 1, 5, ubicacionesUsadas, ubi1,calRampage)
-		val est2 = new EstadisticasPersonajes(personaje2,10,4, 3, 1, 5, ubicacionesUsadas, ubi1,calRampage)
-		val est3 = new EstadisticasPersonajes(personaje3,3,1, 1, 1, 1, ubicacionesUsadas, ubi1,calPerdedora)
-		val est4 = new EstadisticasPersonajes(personaje4,2,1,1, 1, 1, ubicacionesUsadas, ubi1,calPerdedora)
-		val est5 = new EstadisticasPersonajes(personaje5,1,1,1, 1, 1, ubicacionesUsadas, ubi1,calPerdedora)
+		val ubicacionesUsadas2 = new ArrayList<Ubicacion>
+		ubicacionesUsadas2.addAll(Arrays.asList(ubi2, ubi2, ubi2, ubi3, ubi4))
+		val est2 = new EstadisticasPersonajes(personaje2, 5, 4, 3, 2, 1, ubicacionesUsadas2, ubi1,calDominador)
+		
+		val ubicacionesUsadas3 = new ArrayList<Ubicacion>
+		ubicacionesUsadas3.addAll(Arrays.asList(ubi1, ubi2, ubi4))
+		val est3 = new EstadisticasPersonajes(personaje3, 3, 1, 2, 1, 1, ubicacionesUsadas3, ubi1,calKiller)
+		
+		val ubicacionesUsadas4 = new ArrayList<Ubicacion>
+		ubicacionesUsadas4.addAll(Arrays.asList(ubi3, ubi4))
+		val est4 = new EstadisticasPersonajes(personaje4, 2, 1, 1, 1, 1, ubicacionesUsadas4, ubi1,calManco)
+		
+		val ubicacionesUsadas5= new ArrayList<Ubicacion>
+		ubicacionesUsadas5.addAll(Arrays.asList(ubi4))
+		val est5 = new EstadisticasPersonajes(personaje5, 1, 0, 0, 1, 1, ubicacionesUsadas5, ubi1,calNoob)
+		
+		val est0 = new EstadisticasPersonajes(personaje0)
 		
 		var List<EstadisticasPersonajes> estadisticasPersonajes = new ArrayList<EstadisticasPersonajes>()
 		
@@ -104,15 +139,15 @@ class RetarADueloApplication extends Application{
 		estadisticasPersonajes.add(est3)
 		estadisticasPersonajes.add(est4)
 		estadisticasPersonajes.add(est5)
+		estadisticasPersonajes.add(est0)
 		
 		//////////////////////////JUGADOR////////////////////////////
 		val Sistema sis = new Sistema()
-		var Jugador jugador = new Jugador("Super Hijitus",sis,estadisticasPersonajes)
-		//var Jugador jugador2 = new Jugador("Neurus",sis,estadisticasPersonajes)
+		var Jugador jugador = new Jugador("La Tota",sis,estadisticasPersonajes)
+	//	var Jugador jugador2 = new Jugador("Neurus",sis,estadisticasPersonajes)
 		
 		var RetarADueloAppModel retAppModel = new RetarADueloAppModel(jugador)
 		new RetarADueloWindow(this,retAppModel)
-		
 		
 		//new ResultadoDueloWindow(this,new DueloAppModel(sis.realizarDuelo(new Retador(jugador, personaje1,ubi1,new Iniciador),new Retador(jugador, personaje1,ubi1,new NoIniciador))))
 	}
