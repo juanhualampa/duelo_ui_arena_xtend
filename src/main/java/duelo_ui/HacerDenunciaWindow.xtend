@@ -13,6 +13,7 @@ import domain.Motivo
 import appModels.DenunciaAppModel
 import org.uqbar.arena.bindings.NotNullObservable
 import org.uqbar.arena.layout.HorizontalLayout
+import java.awt.Color
 
 class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 	
@@ -30,7 +31,7 @@ class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 	def denunciaDisplay(Panel panel){
 			new Panel(panel) => [
 			layout = new ColumnLayout(2)
-			new Label(it).setText("Estas queriendo denunciar a: ")			
+			new Label(it).setText("Estas queriendo denunciar a: ").setForeground(Color.MAGENTA)		
 			new Label(it).bindValueToProperty("denunciado.nombre")
 			
 			new Label(it).setText("Motivo: ")	
