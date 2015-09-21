@@ -72,6 +72,7 @@ class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 	}
 	
 	def generarDenuncia() {
+<<<<<<< HEAD
 //		println(modelObject.unMotivo)
 //		this.modelObject.unMotivo.irSegun
 		this.modelObject.efectivizarDenuncia
@@ -79,6 +80,16 @@ class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 			this.openDialog(new DenunciaVerdadera(this,modelObject.denunciado))
 		else
 			this.openDialog(new DenunciaFalsa(this,modelObject.denunciante))			
+=======
+		if(this.modelObject.calcularValidez())
+			{						
+				this.openDialog(new DenunciaVerdaderaWindow(this,modelObject.denunciado))	
+			}
+		else
+			{
+				this.openDialog(new DenunciaFalsaWindow(this,modelObject.denunciado))
+			}	
+>>>>>>> 83d6cea7980ca1371796100eb43608b196ed3237
 	}
 	
 //	def dispatch void irSegun(ComunicacionAbusiva motivo){
