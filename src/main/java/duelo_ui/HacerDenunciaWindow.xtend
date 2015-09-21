@@ -12,6 +12,7 @@ import org.uqbar.arena.bindings.PropertyAdapter
 import domain.Motivo
 import appModels.DenunciaAppModel
 import org.uqbar.arena.layout.HorizontalLayout
+import java.awt.Color
 
 class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 	

@@ -14,9 +14,6 @@ import domain.Ubicacion
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.layout.HorizontalLayout
 import domain.NoHayOponenteException
-import domain.Personaje
-import domain.Retador
-import domain.Iniciador
 import domain.Duelo
 import java.awt.Color
 import appModels.DueloAppModel
@@ -73,7 +70,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		new Panel(mainPanel) => [
 			layout = new ColumnLayout(2)
 			new Label(it).setText("Personaje Buscado")
-			new TextBox(it).bindValueToProperty("personajeABuscar") 
+			new TextBox(it).bindValueToProperty("personajeABuscar")// width=100
 		]		
 	}
 	

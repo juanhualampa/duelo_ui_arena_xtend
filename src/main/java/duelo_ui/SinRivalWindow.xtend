@@ -27,7 +27,6 @@ class SinRivalWindow extends TransactionalDialog<MrxAppModel>{
 		
 		new Button(denunciasPanel) => [
 			caption = "Descansar en mi gloria"
-			setAsDefault
 			onClick [ |  this.cancel]
 			
 		]

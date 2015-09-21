@@ -12,7 +12,7 @@ import org.uqbar.arena.actions.MessageSend
 import appModels.DenunciaAppModel
 import org.uqbar.arena.aop.windows.TransactionalDialog
 import org.uqbar.arena.layout.VerticalLayout
-import org.uqbar.arena.layout.HorizontalLayout
+
 
 class ResultadoDueloWindow extends TransactionalDialog<DueloAppModel>{
 	
@@ -46,7 +46,6 @@ class ResultadoDueloWindow extends TransactionalDialog<DueloAppModel>{
 	
 	def crearParteIzq(Panel panel) {
 		crearParteTemp(panel , "estadisticasRetador", this.modelObject.nombreRetador, this.modelObject.personajeRetador)
-//			layout = new HorizontalLayout
 	}	
 	
 	def crearParteDer(Panel panel) {
