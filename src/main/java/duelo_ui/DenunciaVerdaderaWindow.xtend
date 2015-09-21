@@ -3,7 +3,7 @@ package duelo_ui
 import org.uqbar.arena.windows.WindowOwner
 import domain.Jugador
 
-class DenunciaVerdadera extends DenunciaTemplate{
+class DenunciaVerdaderaWindow extends DenunciaTemplateWindow{
 	
 	new(WindowOwner owner, Jugador retado) {
 		super(owner, retado, "HEMOS DENUNCIADO A: " + retado.nombre, 

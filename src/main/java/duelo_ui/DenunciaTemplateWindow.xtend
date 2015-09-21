@@ -9,7 +9,7 @@ import java.awt.Color
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.windows.Dialog
 
-class DenunciaTemplate extends Dialog<Jugador>{
+class DenunciaTemplateWindow extends Dialog<Jugador>{
 	
 	String mensaje	
 	String titulo

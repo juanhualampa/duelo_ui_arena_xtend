@@ -75,15 +75,13 @@ class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 	}
 	
 	def generarDenuncia() {
-		//chequear que haya seleccionado algo en el Selector
-		this.modelObject.efectivizarDenuncia()	
 		if(this.modelObject.calcularValidez())
 			{						
-				this.openDialog(new DenunciaVerdadera(this,modelObject.denunciado))	
+				this.openDialog(new DenunciaVerdaderaWindow(this,modelObject.denunciado))	
 			}
 		else
 			{
-				this.openDialog(new DenunciaFalsa(this,modelObject.denunciado))
+				this.openDialog(new DenunciaFalsaWindow(this,modelObject.denunciado))
 			}	
 	}
 	
