@@ -122,13 +122,8 @@ class RetarADueloApplication extends Application{
 		val Sistema sis = new Sistema()
 		var Jugador jugador = new Jugador("La Tota",estadisticasPersonajes)
 		jugador.setSistema(sis)
-<<<<<<< HEAD
 //		COMENTAR PROX LINEA PARA JUGAR CON MrX
 //		var Jugador jugador2 = new Jugador("Hernan Caire",estadisticasPersonajes)
-=======
-	//	var Jugador jugador2 = new Jugador("Neurus",sis,estadisticasPersonajes)
->>>>>>> 8b6fcd6609fb36c556bc7696f1efc4f31fb73d34
-		
 		var RetarADueloAppModel retAppModel = new RetarADueloAppModel(jugador)
 		new RetarADueloWindow(this,retAppModel)
 		

@@ -13,6 +13,11 @@ import domain.Motivo
 import appModels.DenunciaAppModel
 import org.uqbar.arena.layout.HorizontalLayout
 import java.awt.Color
+import domain.AbusoDelSistemaDeDenuncias
+import domain.AbusoDeHabilidad
+import domain.FeedIntencional
+import domain.ComunicacionAbusiva
+import javax.xml.bind.Unmarshaller.Listener
 
 class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 	
@@ -67,13 +72,30 @@ class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 	}
 	
 	def generarDenuncia() {
-		//chequear que haya seleccionado algo en el Selector
-		this.modelObject.efectivizarDenuncia()	
-		if(this.modelObject.calcularValidez())
-			this.openDialog(new DenunciaVerdadera(this,modelObject.denunciado))	
+//		println(modelObject.unMotivo)
+//		this.modelObject.unMotivo.irSegun
+		this.modelObject.efectivizarDenuncia
+		if (this.modelObject.calcularValidez)
+			this.openDialog(new DenunciaVerdadera(this,modelObject.denunciado))
 		else
-			this.openDialog(new DenunciaFalsa(this,modelObject.denunciante))
+			this.openDialog(new DenunciaFalsa(this,modelObject.denunciante))			
 	}
+	
+//	def dispatch void irSegun(ComunicacionAbusiva motivo){
+//		this.openDialog(new DenunciaVerdadera(this,modelObject.denunciado))
+//	}
+//	
+//	def dispatch void irSegun(FeedIntencional motivo){
+//		this.openDialog(new DenunciaVerdadera(this,modelObject.denunciado))
+//	}
+//	
+//	def dispatch void irSegun(AbusoDeHabilidad motivo){
+//		this.openDialog(new DenunciaVerdadera(this,modelObject.denunciado))
+//	}
+//	
+//	def dispatch void irSegun(AbusoDelSistemaDeDenuncias motivo){
+//		this.openDialog(new DenunciaFalsa(this,modelObject.denunciante))
+//	}
 	
 	def openDialog(SimpleWindow<?> dialog) {
 		dialog.open()
