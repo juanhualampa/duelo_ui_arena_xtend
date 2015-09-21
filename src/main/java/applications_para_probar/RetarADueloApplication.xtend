@@ -11,12 +11,6 @@ import domain.Sistema
 import domain.EstadisticasPersonajes
 import java.util.Arrays
 import domain.Calificacion
-import duelo_ui.ResultadoDueloWindow
-import domain.Duelo
-import domain.Retador
-import domain.Iniciador
-import domain.NoIniciador
-import appModels.DueloAppModel
 import appModels.RetarADueloAppModel
 
 class RetarADueloApplication extends Application{
@@ -25,7 +19,6 @@ class RetarADueloApplication extends Application{
 	override protected createMainWindow() {
 		
 		/////////////////////////////////////ESPECIALIDADES////////////////
-		
 		var List<String> esp1 = new ArrayList<String>()
 		esp1.add("vision nocturna");
 		esp1.add("Bloqueo");
@@ -93,22 +86,6 @@ class RetarADueloApplication extends Application{
 		val calManco = new Calificacion("MANCO",15)
 		val calNoob = new Calificacion("NOOB",5)
 		
-		/**
-		 * new(Personaje personaje,int vecesUsadoAntesDelDuelo, 
-		int vecesQueGanoDuelo, int vecesKills, int vecesDeads,
-		 int vecesAssist , List<Ubicacion> ubicacionesUsadas,
-		 Ubicacion mejorUbicacion, Calificacion calificacion ){
-		this.personaje = personaje
-		this.vecesUsadoAntesDelDuelo = vecesUsadoAntesDelDuelo
-		this.vecesQueGanoDuelo = vecesQueGanoDuelo
-		this.vecesKills = vecesKills
-		this.vecesDeads = vecesDeads
-		this.vecesAssist = vecesAssist
-		this.ubicacionesUsadas = ubicacionesUsadas	
-		this.mejorUbicacion = mejorUbicacion
-		this.calificacion = calificacion	
-	}
-		 */
 		///////////////////////CREO ESTADISTICAS PARA PERSONAJES //////////////////////////////
 		val ubicacionesUsadas1 = new ArrayList<Ubicacion>
 		ubicacionesUsadas1.addAll(Arrays.asList(ubi1, ubi1, ubi1, ubi1, ubi1, ubi1, ubi2))
@@ -143,13 +120,14 @@ class RetarADueloApplication extends Application{
 		
 		//////////////////////////JUGADOR////////////////////////////
 		val Sistema sis = new Sistema()
-		var Jugador jugador = new Jugador("La Tota",sis,estadisticasPersonajes)
-	//	var Jugador jugador2 = new Jugador("Neurus",sis,estadisticasPersonajes)
+		var Jugador jugador = new Jugador("La Tota",estadisticasPersonajes)
+		jugador.setSistema(sis)
+//		COMENTAR PROX LINEA PARA JUGAR CON MrX
+//		var Jugador jugador2 = new Jugador("Hernan Caire",estadisticasPersonajes)
 		
 		var RetarADueloAppModel retAppModel = new RetarADueloAppModel(jugador)
 		new RetarADueloWindow(this,retAppModel)
 		
-		//new ResultadoDueloWindow(this,new DueloAppModel(sis.realizarDuelo(new Retador(jugador, personaje1,ubi1,new Iniciador),new Retador(jugador, personaje1,ubi1,new NoIniciador))))
 	}
 	
 	def static main(String[] args) {

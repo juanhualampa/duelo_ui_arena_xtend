@@ -11,7 +11,6 @@ import org.uqbar.arena.widgets.Selector
 import org.uqbar.arena.bindings.PropertyAdapter
 import domain.Motivo
 import appModels.DenunciaAppModel
-import org.uqbar.arena.bindings.NotNullObservable
 import org.uqbar.arena.layout.HorizontalLayout
 
 class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
@@ -30,14 +29,13 @@ class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 	def denunciaDisplay(Panel panel){
 			new Panel(panel) => [
 			layout = new ColumnLayout(2)
-			new Label(it).setText("Estas queriendo denunciar a: ")			
+			new Label(it).setText("Estas queriendo denunciar a: ").setForeground(Color.MAGENTA)		
 			new Label(it).bindValueToProperty("denunciado.nombre")
 			
 			new Label(it).setText("Motivo: ")	
 			new Selector(it) => [
 				allowNull = false
 				bindItemsToProperty("motivosPosibles").adapter = new PropertyAdapter(Motivo,"nombre")
-				//bindItemsToProperty("motivosPosibles")
 				bindValueToProperty("unMotivo")
 			]
 						
@@ -57,9 +55,6 @@ class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 			new Button(it) => [
 			caption = " Denunciar "
 			onClick [ | this.generarDenuncia() ]
-				
-			//bindEnabled(new NotNullObservable("unMotivo"))
-			//bindEnabled(new NotNullObservable("palabrasDescripcion"))		
 			bindEnabledToProperty("puedeDenunciar")
 			]
 			new Button(it) => [
@@ -70,37 +65,21 @@ class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 		]
 	}
 	
-	override protected addActions(Panel denunciasPanel) {
-	}
-	
 	def generarDenuncia() {
 		//chequear que haya seleccionado algo en el Selector
 		this.modelObject.efectivizarDenuncia()	
 		if(this.modelObject.calcularValidez())
-			{						
-				this.openDialog(new DenunciaVerdadera(this,modelObject.denunciado))	
-			}
+			this.openDialog(new DenunciaVerdadera(this,modelObject.denunciado))	
 		else
-			{
-				this.openDialog(new DenunciaFalsa(this,modelObject.denunciado))
-			}	
+			this.openDialog(new DenunciaFalsa(this,modelObject.denunciante))
 	}
 	
 	def openDialog(SimpleWindow<?> dialog) {
 		dialog.open()
 	}
 	
+	override protected addActions(Panel denunciasPanel) {
+	}
+	
 }
 
-//		new TextBox(editorPanel) => [
-//			width = 110
-//			withFilter(new DateTextFilter)
-//			bindValueToProperty("fecha").transformer = new DateAdapter
-//		]
-
-//			new Selector(editorPanel) => [
-//			allowNull = false
-//			width = 100
-//			bindItemsToProperty("tipo.valoresPosibles")
-//			bindValueToProperty("valorApostado")			
-//		]
