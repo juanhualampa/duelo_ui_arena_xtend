@@ -44,7 +44,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	
 	def crearPanelIzquierdo(Panel panel) {
 		new Panel(panel) =>[
-			layout = new VerticalLayout()
+			layout = new VerticalLayout
 		this.buscarPersonaje(it)
 		this.personajesYPuntaje(it)
 		]
@@ -52,17 +52,15 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		
 	def crearPanelCentral(Panel panel) {
 		new Panel(panel) => [
-			layout = new VerticalLayout()
-			new Label(it).setForeground(Color.BLUE).setFontSize(18)
-			.bindValueToProperty("personajeConPuntaje.personaje")
+			layout = new VerticalLayout
+			new Label(it).setForeground(Color.BLUE).setFontSize(18).bindValueToProperty("personajeConPuntaje.personaje")
 			this.datosPersonaje(it)			
 		]
 	}
 	
-	def crearPanelDerecho(Panel panel) {
-		
+	def crearPanelDerecho(Panel panel) {		
 		new Panel(panel) => [			
-			layout = new VerticalLayout()		
+			layout = new VerticalLayout		
 			new Label(it).setText("STATS").setForeground(Color.BLUE).setFontSize(18)		
 			this.estadisticas(it)
 			this.botonera(it)
@@ -88,7 +86,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	
 	def datosPersonaje(Panel panel) {		
 		new Panel(panel) =>[			
-			layout = new VerticalLayout()
+			layout = new VerticalLayout
 			crearCaracteristicaPersonaje(it ,"Especialidades","personajeConPuntaje.personaje.especialidades")
 			crearCaracteristicaPersonaje(it,"Debilidades","personajeConPuntaje.personaje.debilidades")
 	        crearLabelConColor(it,"Ubicacion Ideal","personajeConPuntaje.personaje.ubicacionIdeal",Color.WHITE)
@@ -112,9 +110,6 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	def estadisticas(Panel mainPanel) {
 		new Panel(mainPanel) => [
 		layout = new ColumnLayout(2)
-//		this.modelObject.datosDeEstadisticas.forEach[
-//			crearLabel(panel,it.key,it.value.toString)
-//		]	
 			crearLabel(it,"Jugadas","estadisticaPersonajeSeleccionado.vecesUsadoAntesDelDuelo")
 			crearLabel(it,"Ganadas","estadisticaPersonajeSeleccionado.vecesQueGanoDuelo")
 			crearLabel(it,"Kills","estadisticaPersonajeSeleccionado.vecesKills")
@@ -161,12 +156,8 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 			layout = new ColumnLayout(2)
 			this.modelObject.ubicacionesPosibles.forEach[
 			crearButtonParaAcciones(panel, it.toString ,it)
+			]
 		]
-		]
-//		new Label(panel).setText("JUGAR")
-//		this.modelObject.ubicacionesPosibles.forEach[
-//			crearButtonParaAcciones(panel, it.toString ,it)
-//		]
 	}
 	
 	def validar(Ubicacion ubicacion) {
@@ -185,8 +176,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	
 	def entroPorMrX(){
 		this.openDialog(new SinRivalWindow(this,new MrxAppModel(this.modelObject.retador,this.modelObject.jugador.sistema)))
-	}
-	
+	}	
 	
 	def openDialog(SimpleWindow <?> window){
 		window.open

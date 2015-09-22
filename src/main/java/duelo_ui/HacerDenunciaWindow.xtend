@@ -14,6 +14,7 @@ import appModels.DenunciaAppModel
 import org.uqbar.arena.bindings.NotNullObservable
 import org.uqbar.arena.layout.HorizontalLayout
 import java.awt.Color
+import org.apache.commons.lang.StringUtils
 
 class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 	
@@ -44,6 +45,7 @@ class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 						
 			new Label(it).setText("Detalles:")			
 			new TextBox(it) => [
+				 withFilter [ event | ! StringUtils.isBlank(event.potentialTextResult)]
 				 bindValueToProperty("palabrasDescripcion")
 				 width = 230
 				 height =20
@@ -52,13 +54,33 @@ class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 	}
 	
 	def botonera(Panel panel){
+		
+		/*
+		 * Si usamos este se ve distinto pero funciona"
+		 */
+//		new Button(panel) => [
+//			caption = " Denunciar "
+//			
+//			onClick [ | this.generarDenuncia() ]
+//			
+//			//bindEnabled(new NotNullObservable("unMotivo"))
+//			//bindEnabled(new NotNullObservable("palabrasDescripcion"))		
+//			bindEnabledToProperty("puedeDenunciar")
+//		]
+//		
+//		new Button(panel) => [
+//			setAsDefault
+//			caption = " Cancelar "
+//			onClick [ | this.close() ]
+//		]	
+				
 		new Panel(panel) => [
 			layout = new HorizontalLayout
-			
 			new Button(it) => [
 			caption = " Denunciar "
+			
 			onClick [ | this.generarDenuncia() ]
-				
+			
 			//bindEnabled(new NotNullObservable("unMotivo"))
 			//bindEnabled(new NotNullObservable("palabrasDescripcion"))		
 			bindEnabledToProperty("puedeDenunciar")
@@ -88,19 +110,5 @@ class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 	
 	def openDialog(SimpleWindow<?> dialog) {
 		dialog.open()
-	}
-	
+	}	
 }
-
-//		new TextBox(editorPanel) => [
-//			width = 110
-//			withFilter(new DateTextFilter)
-//			bindValueToProperty("fecha").transformer = new DateAdapter
-//		]
-
-//			new Selector(editorPanel) => [
-//			allowNull = false
-//			width = 100
-//			bindItemsToProperty("tipo.valoresPosibles")
-//			bindValueToProperty("valorApostado")			
-//		]
