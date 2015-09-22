@@ -89,7 +89,11 @@ class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 			{
 				this.openDialog(new DenunciaFalsaWindow(this,modelObject.denunciado))
 			}	
+<<<<<<< HEAD
 >>>>>>> 83d6cea7980ca1371796100eb43608b196ed3237
+=======
+		this.close
+>>>>>>> f368181539c2a671e4a7725c786bc51693ea1ee2
 	}
 	
 //	def dispatch void irSegun(ComunicacionAbusiva motivo){
