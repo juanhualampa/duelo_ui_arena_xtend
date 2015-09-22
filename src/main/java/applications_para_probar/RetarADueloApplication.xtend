@@ -12,6 +12,7 @@ import domain.EstadisticasPersonajes
 import java.util.Arrays
 import domain.Calificacion
 import appModels.RetarADueloAppModel
+import homes.DummySistema
 
 class RetarADueloApplication extends Application{
 	
@@ -110,7 +111,7 @@ class RetarADueloApplication extends Application{
 		
 		val est0 = new EstadisticasPersonajes(personaje0)
 		
-		var List<EstadisticasPersonajes> estadisticasPersonajes = new ArrayList<EstadisticasPersonajes>()
+		val estadisticasPersonajes = new ArrayList<EstadisticasPersonajes>()
 		
 		estadisticasPersonajes.add(est1)
 		estadisticasPersonajes.add(est2)
@@ -119,13 +120,25 @@ class RetarADueloApplication extends Application{
 		estadisticasPersonajes.add(est5)
 		estadisticasPersonajes.add(est0)
 		
+		val estadisticasPersonajes2 = new ArrayList<EstadisticasPersonajes>()		
+		estadisticasPersonajes2.add(est1)
+		
+		val estadisticasPersonajes3 = new ArrayList<EstadisticasPersonajes>()		
+		estadisticasPersonajes3.add(est2)
+		
 		//////////////////////////JUGADOR////////////////////////////
 		val Sistema sis = new Sistema()
-		var Jugador jugador = new Jugador("La Tota",estadisticasPersonajes)
+		val Jugador jugador = new Jugador("Super Hijitus",estadisticasPersonajes)
 		jugador.setSistema(sis)
-	//	var Jugador jugador2 = new Jugador("Neurus",sis,estadisticasPersonajes)
 		
-		var RetarADueloAppModel retAppModel = new RetarADueloAppModel(jugador)
+		val Jugador jugador2 = new Jugador("Neurus",estadisticasPersonajes2)
+		jugador2.setSistema(sis)
+		
+		val Jugador jugador3 = new Jugador("Larguirucho",estadisticasPersonajes3)
+		jugador3.setSistema(sis)
+		
+		//val dummyData = new DummySistema
+		val retAppModel = new RetarADueloAppModel(jugador)//dummyData.jugadorPrincipal)
 		new RetarADueloWindow(this,retAppModel)
 		
 	}

@@ -93,6 +93,7 @@ class ResultadoDueloWindow extends TransactionalDialog<DueloAppModel>{
 	
 	def denunciar(){
 		new HacerDenunciaWindow(this,new DenunciaAppModel(this.modelObject.duelo)).open
+		this.close
 	}
 	
 }

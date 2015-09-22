@@ -83,6 +83,7 @@ class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 			{
 				this.openDialog(new DenunciaFalsaWindow(this,modelObject.denunciado))
 			}	
+		this.close
 	}
 	
 	def openDialog(SimpleWindow<?> dialog) {
