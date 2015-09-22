@@ -35,10 +35,8 @@ class SinRivalWindow extends TransactionalDialog<MrxAppModel>{
 	
 	def displayStatistics() {
 		val duelo = this.modelObject.realizarDuelo
-		/*
-		 * if 
-		 */
 		this.openDialog(new ResultadoDueloWindow(this,new DueloAppModel(duelo)))
+		this.close
 	}
 	
 	def openDialog(SimpleWindow <?> window){
