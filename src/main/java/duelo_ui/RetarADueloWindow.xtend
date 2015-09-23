@@ -14,7 +14,10 @@ import domain.Ubicacion
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.layout.HorizontalLayout
 import domain.NoHayOponenteException
+<<<<<<< HEAD
 import domain.Duelo
+=======
+>>>>>>> 7c63b6bfd72015e75048d0c1acedd9e04c675cf7
 import duelos.Duelo
 import java.awt.Color
 import appModels.DueloAppModel
@@ -45,16 +48,25 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	def crearPanelIzquierdo(Panel panel) {
 		new Panel(panel) =>[
 			layout = new VerticalLayout
+<<<<<<< HEAD
 			width = 300
 			this.buscarPersonaje(it)
 			this.personajesYPuntaje(it)
+=======
+		this.buscarPersonaje(it)
+		this.personajesYPuntaje(it)
+>>>>>>> 7c63b6bfd72015e75048d0c1acedd9e04c675cf7
 		]
 	}
 		
 	def crearPanelCentral(Panel panel) {
 		new Panel(panel) => [
+<<<<<<< HEAD
 			layout = new VerticalLayout()
 			width = 300
+=======
+			layout = new VerticalLayout
+>>>>>>> 7c63b6bfd72015e75048d0c1acedd9e04c675cf7
 			new Label(it).setForeground(Color.BLUE).setFontSize(18).bindValueToProperty("personajeConPuntaje.personaje")
 			this.datosPersonaje(it)			
 		]
@@ -63,7 +75,10 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	def crearPanelDerecho(Panel panel) {		
 		new Panel(panel) => [			
 			layout = new VerticalLayout		
+<<<<<<< HEAD
 			width = 300	
+=======
+>>>>>>> 7c63b6bfd72015e75048d0c1acedd9e04c675cf7
 			new Label(it).setText("STATS").setForeground(Color.BLUE).setFontSize(18)		
 			this.estadisticas(it)
 			this.botonera(it)
@@ -166,7 +181,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	def validar(Ubicacion ubicacion) {
 		this.modelObject.ubicacionSeleccionada = ubicacion
 		try{			
-			entroPorqueEncontroRival(this.modelObject.obtenerDuelo(modelObject.ubicacionSeleccionada))
+			entroPorqueEncontroRival(modelObject.obtenerDuelo(modelObject.ubicacionSeleccionada))
 			}
 		catch (NoHayOponenteException e){
 			entroPorMrX
@@ -178,7 +193,11 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	}
 	
 	def entroPorMrX(){
+<<<<<<< HEAD
 		this.openDialog(new SinRivalWindow(this,new MrxAppModel(this.modelObject.retador,this.modelObject.jugador.sistema)))
+=======
+		this.openDialog(new SinRivalWindow(this,new MrxAppModel(modelObject.retador,modelObject.sistema)))
+>>>>>>> 7c63b6bfd72015e75048d0c1acedd9e04c675cf7
 	}	
 	
 	def openDialog(SimpleWindow <?> window){
