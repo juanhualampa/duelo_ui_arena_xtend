@@ -14,10 +14,6 @@ import domain.Ubicacion
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.layout.HorizontalLayout
 import domain.NoHayOponenteException
-<<<<<<< HEAD
-import domain.Duelo
-=======
->>>>>>> 7c63b6bfd72015e75048d0c1acedd9e04c675cf7
 import duelos.Duelo
 import java.awt.Color
 import appModels.DueloAppModel
@@ -31,14 +27,12 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		super(parent, model)
 		title = "Duelo App"
 		taskDescription  = "Bienvenido: Desde esta página podrás elegir un personaje batirte a duelo con otro jugador"
-		minHeight = 500
 	}
 	
 	override protected createFormPanel(Panel mainPanel) {
 		crearLabelConColorYTamanio(mainPanel,"Selecciona tu personaje para el duelo",18,Color.WHITE,Color.BLACK)
 		new Panel(mainPanel) => [	
 			layout = new HorizontalLayout
-			width = 900
 			crearPanelIzquierdo(it)
 			crearPanelCentral(it)
 			crearPanelDerecho(it)
@@ -48,25 +42,14 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	def crearPanelIzquierdo(Panel panel) {
 		new Panel(panel) =>[
 			layout = new VerticalLayout
-<<<<<<< HEAD
-			width = 300
 			this.buscarPersonaje(it)
 			this.personajesYPuntaje(it)
-=======
-		this.buscarPersonaje(it)
-		this.personajesYPuntaje(it)
->>>>>>> 7c63b6bfd72015e75048d0c1acedd9e04c675cf7
 		]
 	}
 		
 	def crearPanelCentral(Panel panel) {
 		new Panel(panel) => [
-<<<<<<< HEAD
-			layout = new VerticalLayout()
-			width = 300
-=======
 			layout = new VerticalLayout
->>>>>>> 7c63b6bfd72015e75048d0c1acedd9e04c675cf7
 			new Label(it).setForeground(Color.BLUE).setFontSize(18).bindValueToProperty("personajeConPuntaje.personaje")
 			this.datosPersonaje(it)			
 		]
@@ -75,10 +58,6 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	def crearPanelDerecho(Panel panel) {		
 		new Panel(panel) => [			
 			layout = new VerticalLayout		
-<<<<<<< HEAD
-			width = 300	
-=======
->>>>>>> 7c63b6bfd72015e75048d0c1acedd9e04c675cf7
 			new Label(it).setText("STATS").setForeground(Color.BLUE).setFontSize(18)		
 			this.estadisticas(it)
 			this.botonera(it)
@@ -88,9 +67,8 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	def buscarPersonaje(Panel mainPanel) {
 		new Panel(mainPanel) => [
 			layout = new ColumnLayout(2)
-			width=100
 			new Label(it).setText("Personaje Buscado")
-			new TextBox(it).bindValueToProperty("personajeABuscar")
+			new TextBox(it).bindValueToProperty("personajeABuscar") 
 		]		
 	}
 	
@@ -99,6 +77,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		new List(panel) => [
 	            bindItemsToProperty(property)
 	            width = 100
+	            height =100
 	        ]
 	}
 	
@@ -193,11 +172,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	}
 	
 	def entroPorMrX(){
-<<<<<<< HEAD
-		this.openDialog(new SinRivalWindow(this,new MrxAppModel(this.modelObject.retador,this.modelObject.jugador.sistema)))
-=======
-		this.openDialog(new SinRivalWindow(this,new MrxAppModel(modelObject.retador,modelObject.sistema)))
->>>>>>> 7c63b6bfd72015e75048d0c1acedd9e04c675cf7
+		this.openDialog(new SinRivalWindow(this,new MrxAppModel(modelObject.retador, modelObject.sistema)))
 	}	
 	
 	def openDialog(SimpleWindow <?> window){

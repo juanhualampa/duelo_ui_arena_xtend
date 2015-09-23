@@ -12,7 +12,7 @@ import domain.EstadisticasPersonajes
 import java.util.Arrays
 import domain.Calificacion
 import appModels.RetarADueloAppModel
-import homes.DummySistema
+//import homes.DummySistema
 
 class RetarADueloApplication extends Application{
 	
@@ -73,12 +73,13 @@ class RetarADueloApplication extends Application{
 		ubicacionesUsadas.addAll(Arrays.asList(ubi1,ubi2,ubi1,ubi2))
 		
 		///////////////CREO PERSONAJES/////////////////////////
-		var Personaje personaje1 = new Personaje("El Chelo",esp1,deb1,ubi1);		
-		var Personaje personaje2 = new Personaje("Javito",esp2,deb2,ubi2);		
-		var Personaje personaje3 = new Personaje("Ariel Pucheta",esp3,deb3,ubi1);		
-		var Personaje personaje4 = new Personaje("Pablo Lescano",esp4,deb4,ubi3);		
-		var Personaje personaje5 = new Personaje("Leo Mattioli",esp5,deb5,ubi4);
-		var Personaje personaje0 = new Personaje("El Polaco",esp1,deb2,ubi3);
+		var Personaje elChelo = new Personaje("El Chelo",esp1,deb1,ubi1);		
+		var Personaje javito = new Personaje("Javito",esp2,deb2,ubi2);		
+		var Personaje arielPucheta = new Personaje("Ariel Pucheta",esp3,deb3,ubi1);		
+		var Personaje pabloLescano = new Personaje("Pablo Lescano",esp4,deb4,ubi3);		
+		var Personaje leoMattioli = new Personaje("Leo Mattioli",esp5,deb5,ubi4);
+		//PERSONAJE CERO
+		var Personaje elPolaco = new Personaje("El Polaco",esp1,deb2,ubi3);
 		
 		/// LE DOY UNA CALIFICACION INICIAL /////////////////////////
 		val calRampage = new Calificacion("RAMPAGE",100)
@@ -87,53 +88,102 @@ class RetarADueloApplication extends Application{
 		val calManco = new Calificacion("MANCO",15)
 		val calNoob = new Calificacion("NOOB",5)
 		
-		///////////////////////CREO ESTADISTICAS PARA PERSONAJES //////////////////////////////
+		//ESTADISTICAS PERSONAJES SUPER HIJITUS
 		val ubicacionesUsadas1 = new ArrayList<Ubicacion>
 		ubicacionesUsadas1.addAll(Arrays.asList(ubi1, ubi1, ubi1, ubi1, ubi1, ubi1, ubi2))
-		val est1 = new EstadisticasPersonajes(personaje1, 7, 6, 5, 4, 3, ubicacionesUsadas1, ubi1,calRampage)
+		val estRampage = new EstadisticasPersonajes(elChelo, 7, 6, 5, 4, 3, ubicacionesUsadas1, ubi1,calRampage)
 		
 		val ubicacionesUsadas2 = new ArrayList<Ubicacion>
 		ubicacionesUsadas2.addAll(Arrays.asList(ubi2, ubi2, ubi2, ubi3, ubi4))
-		val est2 = new EstadisticasPersonajes(personaje2, 5, 4, 3, 2, 1, ubicacionesUsadas2, ubi1,calDominador)
+		val estDominador = new EstadisticasPersonajes(javito, 5, 4, 3, 2, 1, ubicacionesUsadas2, ubi1,calDominador)
 		
 		val ubicacionesUsadas3 = new ArrayList<Ubicacion>
 		ubicacionesUsadas3.addAll(Arrays.asList(ubi1, ubi2, ubi4))
-		val est3 = new EstadisticasPersonajes(personaje3, 3, 1, 2, 1, 1, ubicacionesUsadas3, ubi1,calKiller)
+		val estKiller = new EstadisticasPersonajes(arielPucheta, 3, 1, 2, 1, 1, ubicacionesUsadas3, ubi1,calKiller)
 		
 		val ubicacionesUsadas4 = new ArrayList<Ubicacion>
 		ubicacionesUsadas4.addAll(Arrays.asList(ubi3, ubi4))
-		val est4 = new EstadisticasPersonajes(personaje4, 2, 1, 1, 1, 1, ubicacionesUsadas4, ubi1,calManco)
+		val estManco = new EstadisticasPersonajes(pabloLescano, 2, 1, 1, 1, 1, ubicacionesUsadas4, ubi1,calManco)
 		
 		val ubicacionesUsadas5= new ArrayList<Ubicacion>
 		ubicacionesUsadas5.addAll(Arrays.asList(ubi4))
-		val est5 = new EstadisticasPersonajes(personaje5, 1, 0, 0, 1, 1, ubicacionesUsadas5, ubi1,calNoob)
+		val estNoob = new EstadisticasPersonajes(leoMattioli, 1, 0, 0, 1, 1, ubicacionesUsadas5, ubi1,calNoob)
 		
-		val est0 = new EstadisticasPersonajes(personaje0)
+		val est0 = new EstadisticasPersonajes(elPolaco)
 		
+		//PERSONAJES DE SUPER HIJITUS
 		val estadisticasPersonajes = new ArrayList<EstadisticasPersonajes>()
-		
-		estadisticasPersonajes.add(est1)
-		estadisticasPersonajes.add(est2)
-		estadisticasPersonajes.add(est3)
-		estadisticasPersonajes.add(est4)
-		estadisticasPersonajes.add(est5)
+		estadisticasPersonajes.add(estRampage)
+		estadisticasPersonajes.add(estDominador)
+		estadisticasPersonajes.add(estKiller)
+		estadisticasPersonajes.add(estManco)
+		estadisticasPersonajes.add(estNoob)
 		estadisticasPersonajes.add(est0)
 		
-		val estadisticasPersonajes2 = new ArrayList<EstadisticasPersonajes>()		
-		estadisticasPersonajes2.add(est1)
+		//ESTADISTICAS PERSONAJES NEURUS
+		val ubicacionesUsadas6 = new ArrayList<Ubicacion>
+		ubicacionesUsadas6.addAll(Arrays.asList(ubi2, ubi2, ubi2, ubi1, ubi4))
+		val estDominador6 = new EstadisticasPersonajes(elChelo, 6, 3, 2, 1, 4, ubicacionesUsadas2, ubi1,calDominador)
 		
+		val ubicacionesUsadas7 = new ArrayList<Ubicacion>
+		ubicacionesUsadas7.addAll(Arrays.asList(ubi1, ubi1, ubi1, ubi1, ubi1, ubi1, ubi3))
+		val estRampage2 = new EstadisticasPersonajes(javito, 8, 7, 5, 4, 2, ubicacionesUsadas1, ubi1,calRampage)
+		
+		val ubicacionesUsadas8 = new ArrayList<Ubicacion>
+		ubicacionesUsadas8.addAll(Arrays.asList(ubi4))
+		val estNoob2 = new EstadisticasPersonajes(arielPucheta, 1, 0, 1, 2, 4, ubicacionesUsadas5, ubi1,calNoob)
+		
+		val ubicacionesUsadas9 = new ArrayList<Ubicacion>
+		ubicacionesUsadas9.addAll(Arrays.asList(ubi3, ubi4))
+		val estManco2 = new EstadisticasPersonajes(pabloLescano, 2, 2, 0, 1, 1, ubicacionesUsadas4, ubi1,calManco)
+		
+		val ubicacionesUsadas10= new ArrayList<Ubicacion>
+		ubicacionesUsadas10.addAll(Arrays.asList(ubi1, ubi2, ubi3))
+		val estKiller2 = new EstadisticasPersonajes(leoMattioli,3, 1, 2, 1, 5, ubicacionesUsadas3, ubi1,calKiller)
+		
+		//PERSONAJES DE NEURUS
+		val estadisticasPersonajes2 = new ArrayList<EstadisticasPersonajes>()		
+		estadisticasPersonajes2.add(estDominador6)
+		estadisticasPersonajes2.add(estRampage2)
+		estadisticasPersonajes2.add(estNoob2)
+		//estadisticasPersonajes2.add(estManco2)
+		estadisticasPersonajes2.add(estKiller2)
+		
+		//ESTADISTICAS PERSONAJES NEURUS
+		val ubicacionesUsadas11= new ArrayList<Ubicacion>
+		ubicacionesUsadas11.addAll(Arrays.asList(ubi4))
+		val estNoob3 = new EstadisticasPersonajes(leoMattioli, 1, 0, 0, 1, 1, ubicacionesUsadas5, ubi1,calNoob)
+		
+		val ubicacionesUsadas12 = new ArrayList<Ubicacion>
+		ubicacionesUsadas12.addAll(Arrays.asList(ubi3, ubi4))
+		val estManco3 = new EstadisticasPersonajes(pabloLescano, 2, 1, 1, 1, 1, ubicacionesUsadas4, ubi1,calManco)
+		
+		val ubicacionesUsadas13 = new ArrayList<Ubicacion>
+		ubicacionesUsadas13.addAll(Arrays.asList(ubi2, ubi2, ubi2, ubi3, ubi4))
+		val estDominador3 = new EstadisticasPersonajes(javito, 8, 1, 7, 2, 9, ubicacionesUsadas2, ubi1,calDominador)
+		
+		val ubicacionesUsadas14 = new ArrayList<Ubicacion>
+		ubicacionesUsadas14.addAll(Arrays.asList(ubi1, ubi2, ubi4))
+		val estKiller3 = new EstadisticasPersonajes(leoMattioli, 3, 2, 1, 0, 8, ubicacionesUsadas3, ubi1,calKiller)
+
+		val ubicacionesUsadas15 = new ArrayList<Ubicacion>
+		ubicacionesUsadas15.addAll(Arrays.asList(ubi1, ubi1, ubi1, ubi1, ubi1, ubi1, ubi2))
+		val estRampage3 = new EstadisticasPersonajes(elChelo, 9, 8, 1, 6, 4, ubicacionesUsadas1, ubi1,calRampage)
+		
+		//PERSONAJES DE LARGUIRUCHO
 		val estadisticasPersonajes3 = new ArrayList<EstadisticasPersonajes>()		
-		estadisticasPersonajes3.add(est2)
+		estadisticasPersonajes3.add(estNoob3)
+		//estadisticasPersonajes3.add(estManco3)
+		estadisticasPersonajes3.add(estDominador3)
+		estadisticasPersonajes3.add(estKiller3)
+		estadisticasPersonajes3.add(estRampage3)
 		
 		//////////////////////////JUGADOR////////////////////////////
 		val Sistema sis = new Sistema()
 		val Jugador jugador = new Jugador("Super Hijitus",estadisticasPersonajes)
 		jugador.setSistema(sis)
-<<<<<<< HEAD
 //		COMENTAR PROX LINEA PARA JUGAR CON MrX
 //		var Jugador jugador2 = new Jugador("Hernan Caire",estadisticasPersonajes)
-		var RetarADueloAppModel retAppModel = new RetarADueloAppModel(jugador)
-=======
 		
 		val Jugador jugador2 = new Jugador("Neurus",estadisticasPersonajes2)
 		jugador2.setSistema(sis)
@@ -143,7 +193,6 @@ class RetarADueloApplication extends Application{
 		
 		//val dummyData = new DummySistema
 		val retAppModel = new RetarADueloAppModel(jugador)//dummyData.jugadorPrincipal)
->>>>>>> f368181539c2a671e4a7725c786bc51693ea1ee2
 		new RetarADueloWindow(this,retAppModel)
 		
 	}

@@ -13,14 +13,6 @@ import duelos.Motivo
 import appModels.DenunciaAppModel
 import org.uqbar.arena.layout.HorizontalLayout
 import java.awt.Color
-<<<<<<< HEAD
-import domain.AbusoDelSistemaDeDenuncias
-import domain.AbusoDeHabilidad
-import domain.FeedIntencional
-import domain.ComunicacionAbusiva
-import javax.xml.bind.Unmarshaller.Listener
-=======
->>>>>>> 7c63b6bfd72015e75048d0c1acedd9e04c675cf7
 import org.apache.commons.lang.StringUtils
 
 class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
@@ -86,11 +78,6 @@ class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 			caption = " Denunciar "
 			
 			onClick [ | this.generarDenuncia() ]
-<<<<<<< HEAD
-
-=======
->>>>>>> 7c63b6bfd72015e75048d0c1acedd9e04c675cf7
-			
 			//bindEnabled(new NotNullObservable("unMotivo"))
 			//bindEnabled(new NotNullObservable("palabrasDescripcion"))		
 			bindEnabledToProperty("puedeDenunciar")
@@ -103,10 +90,10 @@ class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 		]
 	}
 	
+	override protected addActions(Panel denunciasPanel) {
+	}
+	
 	def generarDenuncia() {
-//		println(modelObject.unMotivo)
-//		this.modelObject.unMotivo.irSegun
-		this.modelObject.cambioMotivoSiNoEsValido
 		if(this.modelObject.calcularValidez())
 			{						
 				this.openDialog(new DenunciaVerdaderaWindow(this,modelObject.denunciado))	
@@ -136,15 +123,5 @@ class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 	
 	def openDialog(SimpleWindow<?> dialog) {
 		dialog.open()
-<<<<<<< HEAD
-	}
-	
-	override protected addActions(Panel denunciasPanel) {
-	}
-	
-}
-
-=======
->>>>>>> 7c63b6bfd72015e75048d0c1acedd9e04c675cf7
 	}	
 }
