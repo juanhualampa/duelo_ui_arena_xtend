@@ -15,6 +15,7 @@ import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.layout.HorizontalLayout
 import domain.NoHayOponenteException
 import domain.Duelo
+import duelos.Duelo
 import java.awt.Color
 import appModels.DueloAppModel
 import appModels.PersonajePuntaje
@@ -27,12 +28,14 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		super(parent, model)
 		title = "Duelo App"
 		taskDescription  = "Bienvenido: Desde esta página podrás elegir un personaje batirte a duelo con otro jugador"
+		minHeight = 500
 	}
 	
 	override protected createFormPanel(Panel mainPanel) {
 		crearLabelConColorYTamanio(mainPanel,"Selecciona tu personaje para el duelo",18,Color.WHITE,Color.BLACK)
 		new Panel(mainPanel) => [	
 			layout = new HorizontalLayout
+			width = 900
 			crearPanelIzquierdo(it)
 			crearPanelCentral(it)
 			crearPanelDerecho(it)
@@ -41,25 +44,26 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	
 	def crearPanelIzquierdo(Panel panel) {
 		new Panel(panel) =>[
-			layout = new VerticalLayout()
-		this.buscarPersonaje(it)
-		this.personajesYPuntaje(it)
+			layout = new VerticalLayout
+			width = 300
+			this.buscarPersonaje(it)
+			this.personajesYPuntaje(it)
 		]
 	}
 		
 	def crearPanelCentral(Panel panel) {
 		new Panel(panel) => [
 			layout = new VerticalLayout()
-			new Label(it).setForeground(Color.BLUE).setFontSize(18)
-			.bindValueToProperty("personajeConPuntaje.personaje")
+			width = 300
+			new Label(it).setForeground(Color.BLUE).setFontSize(18).bindValueToProperty("personajeConPuntaje.personaje")
 			this.datosPersonaje(it)			
 		]
 	}
 	
-	def crearPanelDerecho(Panel panel) {
-		
+	def crearPanelDerecho(Panel panel) {		
 		new Panel(panel) => [			
-			layout = new VerticalLayout()		
+			layout = new VerticalLayout		
+			width = 300	
 			new Label(it).setText("STATS").setForeground(Color.BLUE).setFontSize(18)		
 			this.estadisticas(it)
 			this.botonera(it)
@@ -69,8 +73,9 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	def buscarPersonaje(Panel mainPanel) {
 		new Panel(mainPanel) => [
 			layout = new ColumnLayout(2)
+			width=100
 			new Label(it).setText("Personaje Buscado")
-			new TextBox(it).bindValueToProperty("personajeABuscar")// width=100
+			new TextBox(it).bindValueToProperty("personajeABuscar")
 		]		
 	}
 	
@@ -79,13 +84,12 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 		new List(panel) => [
 	            bindItemsToProperty(property)
 	            width = 100
-	            height =100
 	        ]
 	}
 	
 	def datosPersonaje(Panel panel) {		
 		new Panel(panel) =>[			
-			layout = new VerticalLayout()
+			layout = new VerticalLayout
 			crearCaracteristicaPersonaje(it ,"Especialidades","personajeConPuntaje.personaje.especialidades")
 			crearCaracteristicaPersonaje(it,"Debilidades","personajeConPuntaje.personaje.debilidades")
 	        crearLabelConColor(it,"Ubicacion Ideal","personajeConPuntaje.personaje.ubicacionIdeal",Color.WHITE)
@@ -109,9 +113,6 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	def estadisticas(Panel mainPanel) {
 		new Panel(mainPanel) => [
 		layout = new ColumnLayout(2)
-//		this.modelObject.datosDeEstadisticas.forEach[
-//			crearLabel(panel,it.key,it.value.toString)
-//		]	
 			crearLabel(it,"Jugadas","estadisticaPersonajeSeleccionado.vecesUsadoAntesDelDuelo")
 			crearLabel(it,"Ganadas","estadisticaPersonajeSeleccionado.vecesQueGanoDuelo")
 			crearLabel(it,"Kills","estadisticaPersonajeSeleccionado.vecesKills")
@@ -146,7 +147,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 			caption = aCaption
 			setAsDefault
 			bindEnabledToProperty("eligioPersonaje")
-			onClick [ | this.validar(ubi)]
+			onClick [ | validar(ubi)]
 		]
 	}
 	
@@ -158,12 +159,8 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 			layout = new ColumnLayout(2)
 			this.modelObject.ubicacionesPosibles.forEach[
 			crearButtonParaAcciones(panel, it.toString ,it)
+			]
 		]
-		]
-//		new Label(panel).setText("JUGAR")
-//		this.modelObject.ubicacionesPosibles.forEach[
-//			crearButtonParaAcciones(panel, it.toString ,it)
-//		]
 	}
 	
 	def validar(Ubicacion ubicacion) {
@@ -182,8 +179,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	
 	def entroPorMrX(){
 		this.openDialog(new SinRivalWindow(this,new MrxAppModel(this.modelObject.retador,this.modelObject.jugador.sistema)))
-	}
-	
+	}	
 	
 	def openDialog(SimpleWindow <?> window){
 		window.open

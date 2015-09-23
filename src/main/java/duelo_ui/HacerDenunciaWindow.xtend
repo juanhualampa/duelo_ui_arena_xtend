@@ -9,7 +9,7 @@ import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Selector
 import org.uqbar.arena.bindings.PropertyAdapter
-import domain.Motivo
+import duelos.Motivo
 import appModels.DenunciaAppModel
 import org.uqbar.arena.layout.HorizontalLayout
 import java.awt.Color
@@ -18,6 +18,7 @@ import domain.AbusoDeHabilidad
 import domain.FeedIntencional
 import domain.ComunicacionAbusiva
 import javax.xml.bind.Unmarshaller.Listener
+import org.apache.commons.lang.StringUtils
 
 class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 	
@@ -47,6 +48,7 @@ class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 						
 			new Label(it).setText("Detalles:")			
 			new TextBox(it) => [
+				 withFilter [ event | ! StringUtils.isBlank(event.potentialTextResult)]
 				 bindValueToProperty("palabrasDescripcion")
 				 width = 230
 				 height =20
@@ -55,12 +57,36 @@ class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 	}
 	
 	def botonera(Panel panel){
+		
+		/*
+		 * Si usamos este se ve distinto pero funciona"
+		 */
+//		new Button(panel) => [
+//			caption = " Denunciar "
+//			
+//			onClick [ | this.generarDenuncia() ]
+//			
+//			//bindEnabled(new NotNullObservable("unMotivo"))
+//			//bindEnabled(new NotNullObservable("palabrasDescripcion"))		
+//			bindEnabledToProperty("puedeDenunciar")
+//		]
+//		
+//		new Button(panel) => [
+//			setAsDefault
+//			caption = " Cancelar "
+//			onClick [ | this.close() ]
+//		]	
+				
 		new Panel(panel) => [
 			layout = new HorizontalLayout
-			
 			new Button(it) => [
 			caption = " Denunciar "
+			
 			onClick [ | this.generarDenuncia() ]
+
+			
+			//bindEnabled(new NotNullObservable("unMotivo"))
+			//bindEnabled(new NotNullObservable("palabrasDescripcion"))		
 			bindEnabledToProperty("puedeDenunciar")
 			]
 			new Button(it) => [
@@ -72,15 +98,9 @@ class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 	}
 	
 	def generarDenuncia() {
-<<<<<<< HEAD
 //		println(modelObject.unMotivo)
 //		this.modelObject.unMotivo.irSegun
-		this.modelObject.efectivizarDenuncia
-		if (this.modelObject.calcularValidez)
-			this.openDialog(new DenunciaVerdadera(this,modelObject.denunciado))
-		else
-			this.openDialog(new DenunciaFalsa(this,modelObject.denunciante))			
-=======
+		this.modelObject.cambioMotivoSiNoEsValido
 		if(this.modelObject.calcularValidez())
 			{						
 				this.openDialog(new DenunciaVerdaderaWindow(this,modelObject.denunciado))	
@@ -89,11 +109,7 @@ class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 			{
 				this.openDialog(new DenunciaFalsaWindow(this,modelObject.denunciado))
 			}	
-<<<<<<< HEAD
->>>>>>> 83d6cea7980ca1371796100eb43608b196ed3237
-=======
 		this.close
->>>>>>> f368181539c2a671e4a7725c786bc51693ea1ee2
 	}
 	
 //	def dispatch void irSegun(ComunicacionAbusiva motivo){
@@ -121,3 +137,5 @@ class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 	
 }
 
+	}	
+}
