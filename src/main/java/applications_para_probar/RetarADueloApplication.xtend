@@ -126,8 +126,8 @@ class RetarADueloApplication extends Application{
 		val estDominador6 = new EstadisticasPersonajes(elChelo, 6, 3, 2, 1, 4, ubicacionesUsadas2, ubi1,calDominador)
 		
 		val ubicacionesUsadas7 = new ArrayList<Ubicacion>
-		ubicacionesUsadas7.addAll(Arrays.asList(ubi1, ubi1, ubi1, ubi1, ubi1, ubi1, ubi3))
-		val estRampage2 = new EstadisticasPersonajes(javito, 8, 7, 5, 4, 2, ubicacionesUsadas1, ubi1,calRampage)
+		ubicacionesUsadas7.addAll(Arrays.asList(ubi1, ubi1, ubi1, ubi1, ubi1, ubi3))
+		val estRampage2 = new EstadisticasPersonajes(javito, 6, 5, 4, 3, 2, ubicacionesUsadas1, ubi1,calRampage)
 		
 		val ubicacionesUsadas8 = new ArrayList<Ubicacion>
 		ubicacionesUsadas8.addAll(Arrays.asList(ubi4))
@@ -139,7 +139,7 @@ class RetarADueloApplication extends Application{
 		
 		val ubicacionesUsadas10= new ArrayList<Ubicacion>
 		ubicacionesUsadas10.addAll(Arrays.asList(ubi1, ubi2, ubi3))
-		val estKiller2 = new EstadisticasPersonajes(leoMattioli,3, 1, 2, 1, 5, ubicacionesUsadas3, ubi1,calKiller)
+		val estKiller2 = new EstadisticasPersonajes(leoMattioli,3, 1, 1, 2, 5, ubicacionesUsadas3, ubi1,calKiller)
 		
 		//PERSONAJES DE NEURUS
 		val estadisticasPersonajes2 = new ArrayList<EstadisticasPersonajes>()		
