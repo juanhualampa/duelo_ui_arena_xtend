@@ -43,7 +43,7 @@ class HacerDenunciaWindow extends SimpleWindow<DenunciaAppModel>{
 						
 			new Label(it).setText("Detalles:")			
 			new TextBox(it) => [
-				 withFilter [ event | ! StringUtils.isBlank(event.potentialTextResult)]
+				 //withFilter [ event | ! StringUtils.isBlank(event.potentialTextResult)]
 				 bindValueToProperty("palabrasDescripcion")
 				 width = 230
 				 height =20
