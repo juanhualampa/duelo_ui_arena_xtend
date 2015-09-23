@@ -14,10 +14,7 @@ import domain.Ubicacion
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.layout.HorizontalLayout
 import domain.NoHayOponenteException
-import domain.Personaje
-import domain.Retador
-import domain.Iniciador
-import domain.Duelo
+import duelos.Duelo
 import java.awt.Color
 import appModels.DueloAppModel
 import appModels.PersonajePuntaje
@@ -144,7 +141,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 			caption = aCaption
 			setAsDefault
 			bindEnabledToProperty("eligioPersonaje")
-			onClick [ | this.validar(ubi)]
+			onClick [ | validar(ubi)]
 		]
 	}
 	
@@ -163,7 +160,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	def validar(Ubicacion ubicacion) {
 		this.modelObject.ubicacionSeleccionada = ubicacion
 		try{			
-			entroPorqueEncontroRival(this.modelObject.obtenerDuelo(modelObject.ubicacionSeleccionada))
+			entroPorqueEncontroRival(modelObject.obtenerDuelo(modelObject.ubicacionSeleccionada))
 			}
 		catch (NoHayOponenteException e){
 			entroPorMrX
@@ -175,7 +172,7 @@ class RetarADueloWindow extends SimpleWindow<RetarADueloAppModel>{
 	}
 	
 	def entroPorMrX(){
-		this.openDialog(new SinRivalWindow(this,new MrxAppModel(this.modelObject.retador,this.modelObject.jugador.sistema)))
+		this.openDialog(new SinRivalWindow(this,new MrxAppModel(modelObject.retador,modelObject.sistema)))
 	}	
 	
 	def openDialog(SimpleWindow <?> window){
